@@ -4,7 +4,13 @@ The Plurimath wheel evaluates serialized AST requests using its bundled Rust
 kernel. Call `plurimath.evaluate(request)` for a Python response envelope
 or `plurimath.evaluate_json(request_text)` for the original JSON response.
 The engine owns exact numeric semantics and typed result, refusal, and
-indeterminate outcomes. Use the `plurimath.evaluate.numeric/1` schema.
+indeterminate outcomes. The bundled kernel accepts two request profiles:
+
+- `plurimath.evaluate.numeric/1` for numeric AST evaluation.
+- `plurimath.evaluate.quantity/1` for exact quantity evaluation. Its bindings
+  can carry exact value strings and unit expressions, for example
+  `{"value":"2","unit":"kV"}`. Use `convert_to` to request a second quantity
+  in a target unit. Unit parsing and algebra run inside the same Rust library.
 
 Install the matching platform wheel. The bundled library is checked against
 its build receipt before loading. `NumericKernel(path)` is also available

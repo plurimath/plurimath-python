@@ -1,12 +1,13 @@
 {
-  "native_source_commit": "7f986456c462970a399badc92eaa357fe0b6ab87",
-  "cargo_lock_sha256": "68345f5d18f23f1a01d1f5e42963e8f21bac450896b47ab6f5aeed025d7dc803",
-  "library_sha256": "905b68defc436c25a3f174bc3fd168cbbd0e0377cf242834a8ad142ed6e5268e",
+  "native_source_commit": "03b0f4861ec374d704ec79de418e362f8f218386",
+  "cargo_lock_sha256": "0347774edb6cc50e0b2a2af46b9efa3a045d75fa922bf54dcaef93c92a6dbfc7",
+  "library_sha256": "0fb25423e8ddf0e62ec6a2d7591b8d277b4eda5bc9adafda9263a7b9409e3746",
   "rustc": "1.95.0 (59807616e 2026-04-14)",
   "platform_tag": "linux_x86_64",
   "target": "x86_64-unknown-linux-gnu",
   "profiles": [
-    "plurimath.evaluate.numeric/1"
+    "plurimath.evaluate.numeric/1",
+    "plurimath.evaluate.quantity/1"
   ],
   "numeric_fixture_source": "7f986456c462970a399badc92eaa357fe0b6ab87",
   "numeric_fixtures": {
@@ -16,5 +17,28 @@
     "numeric-bignum-v1.json": "d410af65f4f58d859c709754c09be51bef3d8aedf7e3404ac659bce22f24bd1f",
     "numeric-validation-v1.json": "c7be94172ac72328680e5dd96af957c0283ea6d1d04d49529dbc9b6bb580f5ed"
   },
-  "adapter_sha256": "b9b5ae3dd3d1a7e33466cc36675820ee219e63feb0c4c58802edb27f675db599"
+  "adapter_sha256": "b9b5ae3dd3d1a7e33466cc36675820ee219e63feb0c4c58802edb27f675db599",
+  "features": [
+    "quantity"
+  ],
+  "quantity_fixture_source": "6062e1a5d0d08122b226575db67026059a25e333",
+  "quantity_fixtures": {
+    "quantity-f40.json": "91822628fe1c7f10f7df94a18b9ff574608e85263c4c022be737e69a6c20dbe2"
+  },
+  "native_source_dependencies": {
+    "asciiunits": "498cec2ce946c7bcb3b1b26313667b188ddf76aa",
+    "unitsml-rs": "fd3b3cbdd3bb91f732e5c8f2d76ff86a8168ec49",
+    "unitsdb-rs": "c631488e03f58c5cfd0ada369948b946a23a4f42",
+    "parsanol": "20d5e6cebcade3cf2111a00a7ef3f5b69d673481"
+  },
+  "native_data": {
+    "asciiunits": {
+      "artifacts/unitsml.json": "139d91337a0944d60f36bc144a205625349f4b3b8b7ff1a0fba3c61e70c57804"
+    },
+    "unitsdb-rs": {
+      "data/unitsdb.json": "660b471fd895d99a74849adaf1cfb0ec4570cd5dbcd9ebf695970af0dc0b3c97"
+    }
+  },
+  "cargo_metadata_sha256": "9b21da85d2c72a216557f81b1c24fe88343352a4e10860de2b44c05ba09dc4bf",
+  "unfiltered_cargo_metadata_sha256": "f022e65d8fcc127139bd8260d791a40fdecce30e89b9a00b3694dc93204392bb"
 }

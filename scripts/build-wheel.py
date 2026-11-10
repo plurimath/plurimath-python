@@ -40,9 +40,34 @@ def main():
         raise RuntimeError("Native library does not target this wheel platform")
     if digest(binary) != pins["library_sha256"]:
         raise RuntimeError("Library differs from the pinned native build")
+    if "cargo_metadata_sha256" in pins and digest(args.cargo_metadata) != pins["cargo_metadata_sha256"]:
+        raise RuntimeError("Cargo metadata differs from the pinned native build")
     metadata = json.loads(args.cargo_metadata.read_bytes())
     if Path(metadata["workspace_root"]).resolve() != source:
         raise RuntimeError("Cargo metadata belongs to a different checkout")
+    packages = {package["name"]: package for package in metadata["packages"]}
+    for name, expected in pins.get("native_source_dependencies", {}).items():
+        checkout = Path(packages[name]["manifest_path"]).parent
+        revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=checkout, text=True).strip()
+        status = subprocess.check_output(
+            ["git", "status", "--porcelain", "--untracked-files=all"], cwd=checkout, text=True
+        ).splitlines()
+        package_source = packages[name]["source"]
+        if package_source and package_source.startswith("git+"):
+            if not package_source.endswith("#" + expected):
+                raise RuntimeError(f"Cargo resolved a different dependency revision: {name}")
+            status = [line for line in status if line != "?? .cargo-ok"]
+        if revision != expected or status:
+            raise RuntimeError(f"Native source dependency differs from its pinned clean checkout: {name}")
+    for name, assets in pins.get("native_data", {}).items():
+        checkout = Path(packages[name]["manifest_path"]).parent
+        for asset, expected in assets.items():
+            if digest(checkout / asset) != expected:
+                raise RuntimeError(f"Bundled native data differs from its pin: {name}/{asset}")
+    root_id = metadata["resolve"]["root"]
+    root_node = next(node for node in metadata["resolve"]["nodes"] if node["id"] == root_id)
+    if not set(pins.get("features", ())).issubset(root_node["features"]):
+        raise RuntimeError("Cargo metadata lacks required native features")
     env = os.environ.copy()
     with TemporaryDirectory(prefix="plurimath-wheel-") as temporary:
         staging = Path(temporary)
@@ -56,6 +81,15 @@ def main():
                      path.name.upper().startswith(("LICENSE", "COPYING", "NOTICE"))}
             if package.get("license_file"):
                 files.add(base / package["license_file"])
+            if package["name"] in ("parsanol", "parsanol-derive"):
+                # The Parsanol workspace license covers both nested crates.
+                workspace = Path(subprocess.check_output(
+                    ["git", "rev-parse", "--show-toplevel"], cwd=base, text=True
+                ).strip())
+                files.update(path for path in workspace.iterdir() if path.is_file()
+                             and path.name.upper().startswith(("LICENSE", "COPYING", "NOTICE")))
+            if not files:
+                raise RuntimeError(f"Native dependency license notice is missing: {name_version}")
             recorded = {}
             for path in sorted(files):
                 destination = notices / name_version / path.name
