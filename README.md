@@ -10,11 +10,14 @@ indeterminate outcomes. The bundled kernel accepts three request profiles:
 - `plurimath.evaluate.quantity/1` for exact quantity evaluation. Its bindings
   can carry exact value strings and unit expressions, for example
   `{"value":"2","unit":"kV"}`. Use `convert_to` to request a second quantity
-  in a target unit. Unit parsing and algebra run inside the same Rust library.
+  in a target unit. The optional `register` array supplies caller-declared
+  conversion factors, offsets and dimensions through the UnitsML register decoder.
+  Unit parsing and algebra run inside the same Rust library.
 
 - `plurimath.evaluate.gum/1` for uncertainty propagation, series statistics,
   coverage factors, conformance decisions, and Monte Carlo propagation.
-  The sealed corpus includes all 13 published Monte Carlo profiles.
+  The sealed corpus includes all 13 published Monte Carlo profiles, calibration,
+  implicit propagation and the supported Annex H examples.
 
 Call `plurimath.initialize()` once to verify and load the bundled library
 before a strict request-processing loop. Initialization returns the reusable

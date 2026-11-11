@@ -13,7 +13,7 @@ class InstalledGum(unittest.TestCase):
         fixture = json.loads(Path(__file__).with_name("gum-wires.json").read_bytes())
         kernel = plurimath.initialize()
         self.assertIs(plurimath.initialize(), kernel)
-        self.assertEqual(len(fixture["cases"]), 73)
+        self.assertEqual(len(fixture["cases"]), 100)
         with ExitStack() as guard:
             for name in ("builtins.open", "io.open", "pathlib.Path.open",
                          "pathlib.Path.read_bytes", "pathlib.Path.read_text"):

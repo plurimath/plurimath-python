@@ -1,7 +1,7 @@
 {
-  "native_source_commit": "8c8f9705308d6d2d513aa12a8fa4815f9aedd5b7",
+  "native_source_commit": "86ece1b9004b1ae09e25b5f962987b6e1067e87c",
   "cargo_lock_sha256": "98f5ce4d6416371c045ca826ff153ba1c28743eeb105029c8b7b049669a5613d",
-  "library_sha256": "85a9408d3783ee28b753463b57e2dfeea33304129f3724bc8d04aecd7c7d096c",
+  "library_sha256": "b2aac863f12a72de1f658971378c8ca8149643167bab2dcab4f96b794cd949be",
   "rustc": "1.95.0 (59807616e 2026-04-14)",
   "platform_tag": "linux_x86_64",
   "target": "x86_64-unknown-linux-gnu",
@@ -16,7 +16,8 @@
     "numeric-supplemental-v1.json": "f888c50611573e0992f37088126e8b89bfcd0688c109ff727fa34275bf19394d",
     "numeric-nonfinite-v1.json": "fefb21a7c6803582593403573bfe7f886d5b5e9b6daa3ddd18e216b020ddbe1d",
     "numeric-bignum-v1.json": "d410af65f4f58d859c709754c09be51bef3d8aedf7e3404ac659bce22f24bd1f",
-    "numeric-validation-v1.json": "c7be94172ac72328680e5dd96af957c0283ea6d1d04d49529dbc9b6bb580f5ed"
+    "numeric-validation-v1.json": "c7be94172ac72328680e5dd96af957c0283ea6d1d04d49529dbc9b6bb580f5ed",
+    "numeric-annex-v1.json": "d261c77c5f1bf3e845c289fbc62a423cc4127b21437f458e11f426ff0ce3082a"
   },
   "adapter_sha256": "b9b5ae3dd3d1a7e33466cc36675820ee219e63feb0c4c58802edb27f675db599",
   "features": [
@@ -24,11 +25,12 @@
   ],
   "quantity_fixture_source": "6062e1a5d0d08122b226575db67026059a25e333",
   "quantity_fixtures": {
-    "quantity-f40.json": "91822628fe1c7f10f7df94a18b9ff574608e85263c4c022be737e69a6c20dbe2"
+    "quantity-f40.json": "91822628fe1c7f10f7df94a18b9ff574608e85263c4c022be737e69a6c20dbe2",
+    "quantity-register-v1.json": "73af1d567d8c0d082bf7ac8f1d1d160f3c3a22a7d419dcac37ac7d36458814b4"
   },
   "native_source_dependencies": {
     "asciiunits": "498cec2ce946c7bcb3b1b26313667b188ddf76aa",
-    "unitsml-rs": "fd3b3cbdd3bb91f732e5c8f2d76ff86a8168ec49",
+    "unitsml-rs": "c0a1bb5e1b5f35f03ce7eac9557ddfedabba3353",
     "unitsdb-rs": "c631488e03f58c5cfd0ada369948b946a23a4f42",
     "parsanol": "20d5e6cebcade3cf2111a00a7ef3f5b69d673481"
   },
@@ -40,10 +42,12 @@
       "data/unitsdb.json": "660b471fd895d99a74849adaf1cfb0ec4570cd5dbcd9ebf695970af0dc0b3c97"
     }
   },
-  "cargo_metadata_sha256": "d50280218e426df7bc047c01abb06e5fe831ee5a58713fd412084d501ffdbfe6",
-  "source_crate_sha256": "2db3c2bb82ed43863b0b820fdff93a1fff297dcaa9fe24af0490169b7f72c93e",
-  "gum_fixture_source": "8c8f9705308d6d2d513aa12a8fa4815f9aedd5b7",
+  "cargo_metadata_sha256": "147c4eb4f9e1f9a7652789b2e6e788e7d00c1ec6059f6aa34469e8341d7114af",
+  "source_crate_sha256": "24a3659313ebb80ec8d6aaa3b6f40fc6ad1f1353a480000e1b83a849e14c45b4",
+  "gum_fixture_source": "1399ce9f0504b303885dbe48ba8dab55750b966b",
   "gum_fixtures": {
-    "gum-wires.json": "7464fb1fe2302ee957f8684a11042440a78803eafbe9d4b3de7003fa8c2c28a0"
-  }
+    "gum-wires.json": "cdcd219e17a95128c6f67e151f8de0b7e362a37e256898930f2157c5fae933e7"
+  },
+  "quantity_register_fixture_source": "6c09171bd987b64c81076d9d741b3faabf75f801",
+  "numeric_annex_fixture_source": "1399ce9f0504b303885dbe48ba8dab55750b966b"
 }

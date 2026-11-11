@@ -25,6 +25,13 @@ def evaluate(ast, bindings=None, **options):
 
 
 class InstalledQuantity(unittest.TestCase):
+    def test_serialized_caller_register_wires(self):
+        fixture = json.loads(Path(__file__).with_name("quantity-register-v1.json").read_bytes())
+        self.assertEqual(len(fixture["cases"]), 35)
+        for row in fixture["cases"]:
+            with self.subTest(case=row["id"]):
+                self.assertEqual(plurimath.evaluate_json(row["request_json"]), row["expected_wire"])
+
     def test_frozen_f40_voltage_current_conversion(self):
         fixture = json.loads(Path(__file__).with_name("quantity-f40.json").read_bytes())
         request = fixture["request"]
