@@ -1,7 +1,7 @@
 {
-  "native_source_commit": "86ece1b9004b1ae09e25b5f962987b6e1067e87c",
+  "native_source_commit": "8f9273968a9e17dc604eb1ae66a84b9c4fa30f1c",
   "cargo_lock_sha256": "98f5ce4d6416371c045ca826ff153ba1c28743eeb105029c8b7b049669a5613d",
-  "library_sha256": "4072ffdf47edd150d0f3f09087620b5a327575a5a9751f8f505c50159aa07d4f",
+  "library_sha256": "4c628ef251326cb6b04b2250cf97bcbafadfcaf0e40e3fb81cc0235bb8652d23",
   "rustc": "1.95.0 (59807616e 2026-04-14)",
   "platform_tag": "win_amd64",
   "target": "x86_64-pc-windows-gnu",
@@ -42,16 +42,18 @@
       "data/unitsdb.json": "660b471fd895d99a74849adaf1cfb0ec4570cd5dbcd9ebf695970af0dc0b3c97"
     }
   },
-  "cargo_metadata_sha256": "69211588e1f3d0104a95071cc0aaac6fae81027acd583570b6306b5f754aca7f",
-  "source_crate_sha256": "24a3659313ebb80ec8d6aaa3b6f40fc6ad1f1353a480000e1b83a849e14c45b4",
+  "cargo_metadata_sha256": "8a6405315c0ac0a01e3ac676c2f35a617dd8be006fb19e5f087de64cafde3072",
+  "source_crate_sha256": "0b5547ada284ef8e70a69de125b385d1688c9c803a48491b0ca7d8cb753b5164",
   "gum_fixture_source": "1399ce9f0504b303885dbe48ba8dab55750b966b",
   "gum_fixtures": {
-    "gum-wires.json": "cdcd219e17a95128c6f67e151f8de0b7e362a37e256898930f2157c5fae933e7"
+    "gum-wires.json": "cdcd219e17a95128c6f67e151f8de0b7e362a37e256898930f2157c5fae933e7",
+    "coverage-validation-wires.json": "9d1335826628737976c927715c27225003ba501061a3397e9069c7b9519cbc7b"
   },
   "quantity_register_fixture_source": "6c09171bd987b64c81076d9d741b3faabf75f801",
   "numeric_annex_fixture_source": "1399ce9f0504b303885dbe48ba8dab55750b966b",
+  "coverage_validation_fixture_source": "8f9273968a9e17dc604eb1ae66a84b9c4fa30f1c",
   "source_metadata_sha256": "147c4eb4f9e1f9a7652789b2e6e788e7d00c1ec6059f6aa34469e8341d7114af",
   "minimum_windows": "Windows 10 x86_64",
-  "native_build_receipt_sha256": "df5404dcd88f96cfc9d2e3079ff8132badfc7eda48f7cee069514b013c9f3692",
-  "native_dependency_policy": "Windows target dependency identities are a checked subset of clean source-validation metadata; no extra target dependencies are accepted."
+  "native_dependency_policy": "Windows target dependency identities are a checked subset of clean source-validation metadata; no extra target dependencies are accepted.",
+  "native_build_receipt_sha256": "3f9950a28e6e3597d2a11777880deb55cfd218dc3c5fd1fcb9d5cb9791c9d1dd"
 }
