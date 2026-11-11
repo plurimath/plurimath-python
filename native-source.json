@@ -1,13 +1,14 @@
 {
-  "native_source_commit": "03b0f4861ec374d704ec79de418e362f8f218386",
-  "cargo_lock_sha256": "0347774edb6cc50e0b2a2af46b9efa3a045d75fa922bf54dcaef93c92a6dbfc7",
-  "library_sha256": "0fb25423e8ddf0e62ec6a2d7591b8d277b4eda5bc9adafda9263a7b9409e3746",
+  "native_source_commit": "8c8f9705308d6d2d513aa12a8fa4815f9aedd5b7",
+  "cargo_lock_sha256": "98f5ce4d6416371c045ca826ff153ba1c28743eeb105029c8b7b049669a5613d",
+  "library_sha256": "85a9408d3783ee28b753463b57e2dfeea33304129f3724bc8d04aecd7c7d096c",
   "rustc": "1.95.0 (59807616e 2026-04-14)",
   "platform_tag": "linux_x86_64",
   "target": "x86_64-unknown-linux-gnu",
   "profiles": [
     "plurimath.evaluate.numeric/1",
-    "plurimath.evaluate.quantity/1"
+    "plurimath.evaluate.quantity/1",
+    "plurimath.evaluate.gum/1"
   ],
   "numeric_fixture_source": "7f986456c462970a399badc92eaa357fe0b6ab87",
   "numeric_fixtures": {
@@ -39,6 +40,10 @@
       "data/unitsdb.json": "660b471fd895d99a74849adaf1cfb0ec4570cd5dbcd9ebf695970af0dc0b3c97"
     }
   },
-  "cargo_metadata_sha256": "9b21da85d2c72a216557f81b1c24fe88343352a4e10860de2b44c05ba09dc4bf",
-  "unfiltered_cargo_metadata_sha256": "f022e65d8fcc127139bd8260d791a40fdecce30e89b9a00b3694dc93204392bb"
+  "cargo_metadata_sha256": "d50280218e426df7bc047c01abb06e5fe831ee5a58713fd412084d501ffdbfe6",
+  "source_crate_sha256": "2db3c2bb82ed43863b0b820fdff93a1fff297dcaa9fe24af0490169b7f72c93e",
+  "gum_fixture_source": "8c8f9705308d6d2d513aa12a8fa4815f9aedd5b7",
+  "gum_fixtures": {
+    "gum-wires.json": "7464fb1fe2302ee957f8684a11042440a78803eafbe9d4b3de7003fa8c2c28a0"
+  }
 }

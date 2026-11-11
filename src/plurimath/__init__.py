@@ -7,7 +7,7 @@ from pathlib import Path
 
 from plurimath_numeric import NumericKernel
 
-__all__ = ["NumericKernel", "evaluate", "evaluate_json"]
+__all__ = ["NumericKernel", "initialize", "evaluate", "evaluate_json"]
 
 
 @lru_cache(maxsize=1)
@@ -20,6 +20,11 @@ def _kernel():
     if sha256(library.read_bytes()).hexdigest() != receipt["sha256"]:
         raise RuntimeError("Bundled Plurimath library failed its integrity check")
     return NumericKernel(library)
+
+
+def initialize():
+    """Load and verify the bundled kernel before evaluating requests."""
+    return _kernel()
 
 
 def evaluate_json(request):
