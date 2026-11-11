@@ -58,6 +58,13 @@ class InstalledFacade(unittest.TestCase):
         finally:
             self.kernel._free = original
 
+    def test_full_source_model_wire_transport(self):
+        fixture = json.loads(Path(__file__).with_name("model-transport-reference.json").read_bytes())
+        self.assertEqual(len(fixture["rows"]), 646)
+        for row in fixture["rows"]:
+            with self.subTest(format=row["source_format"], id=row["source_id"]):
+                self.assertEqual(self.kernel.from_model(row["model"]).model, row["model"])
+
     def test_missing_or_wrong_native_component(self):
         native = Path(plurimath.__file__).with_name("_native")
         with self.assertRaises(plurimath.FacadeUnavailableError):
