@@ -28,3 +28,13 @@ Install the matching platform wheel. The bundled library is checked against
 its build receipt before loading. `NumericKernel(path)` is also available
 for callers that manage an explicit ABI-v1 library. The API accepts AST
 requests from a caller or parser and has no formula-text input.
+
+Windows x86_64 wheels bundle `plurimath_numeric.dll` and use the separately sealed
+`native-source.win_amd64.json`; Linux defaults remain in `native-source.json`.
+To prepare Windows notices on a source-validation host, run `scripts/build-wheel.py`
+with `--platform-tag win_amd64 --prepare-dir DIR --target-metadata WINDOWS_METADATA`
+and the usual pinned source, library and source metadata arguments. This verifies
+the AMD64 PE image, clean source pins, both metadata seals and target dependency
+identities. Build the wheel on Windows with the prepared `build-info.json` as
+`PLURIMATH_NATIVE_RECEIPT` and the DLL as `PLURIMATH_NATIVE`; neither variable is
+needed by the installed runtime.

@@ -4,6 +4,8 @@ from functools import lru_cache
 from hashlib import sha256
 import json
 from pathlib import Path
+import sys
+import sysconfig
 
 from plurimath_numeric import NumericKernel
 
@@ -14,7 +16,9 @@ __all__ = ["NumericKernel", "initialize", "evaluate", "evaluate_json"]
 def _kernel():
     directory = Path(__file__).with_name("_native")
     receipt = json.loads((directory / "build-info.json").read_bytes())
-    if receipt["abi_version"] != 1 or receipt["library"] != "libplurimath_numeric.so":
+    expected = "plurimath_numeric.dll" if sys.platform == "win32" else "libplurimath_numeric.so"
+    platform = sysconfig.get_platform().replace("-", "_").replace(".", "_")
+    if receipt["abi_version"] != 1 or receipt["library"] != expected or receipt["platform_tag"] != platform:
         raise RuntimeError("Unsupported bundled Plurimath ABI")
     library = directory / receipt["library"]
     if sha256(library.read_bytes()).hexdigest() != receipt["sha256"]:
