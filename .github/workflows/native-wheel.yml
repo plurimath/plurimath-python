@@ -1,0 +1,45 @@
+name: Installed native wheel
+# Called by the canonical native producer after it uploads both sealed platform
+# input directories. No private source URL or unbuilt native pin is assumed.
+on:
+  workflow_call:
+    inputs:
+      facade-source:
+        required: true
+        type: string
+      artifact-prefix:
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  installed:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            platform: linux_x86_64
+          - os: windows-latest
+            platform: win_amd64
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.artifact-prefix }}-${{ matrix.platform }}
+          path: native-inputs
+      - run: python -m pip install 'setuptools>=69' 'wheel>=0.43'
+      - name: Validate source, platform and every input byte, then build wheel
+        env:
+          EXPECTED_FACADE_SOURCE: ${{ inputs.facade-source }}
+        run: python scripts/build-native-input-wheel.py --bundle native-inputs --wheel-dir dist
+      - name: Fresh install and all installed API/fixture checks
+        run: python scripts/check-wheel.py --wheel-dir dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plurimath-wheel-${{ matrix.platform }}
+          path: dist/*.whl

@@ -1,0 +1,19 @@
+{
+  "fixtures": [
+    {
+      "source_path": "workspace/core-native/plurimath-rs-lossless-wire/fixtures/source-values/typed-collisions.json",
+      "sha256": "739025586d04c6d43ef3d2d1b6d9ae3c3411a906067eb1cfb683a2f27790ee78",
+      "destination": "tests/source-values-reference.json",
+      "producer_commit": "b2681543f2de85b56fd20d9bc9d0fac3110f286c",
+      "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4"
+    },
+    {
+      "source_path": "workspace/core-native/plurimath-rs-formatter-integrated/fixtures/formatter/ruby-standard66.json",
+      "sha256": "6d9b4222a337330264eab1ea62a8655714d99e72cd54c4f4816b3f85ae082ea6",
+      "destination": "tests/formatter-reference.json",
+      "producer_commit": "60caa168253f78c3f83e4119d2cb2e233a064af6",
+      "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4"
+    }
+  ],
+  "policy": "Exact source fixtures preserved; native capability gates remain separate from wire transport."
+}

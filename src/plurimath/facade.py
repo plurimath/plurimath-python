@@ -29,6 +29,10 @@ class FacadeProtocolError(RuntimeError):
     """The native component returned an invalid ABI envelope."""
 
 
+RUBY_VALUES_PROFILE = "plurimath.ruby-values/1"
+_UNSET = object()
+
+
 def _encode(value):
     return json.dumps(value, ensure_ascii=False, separators=(",", ":"))
 
@@ -89,6 +93,12 @@ class FacadeKernel:
         return Formula._from_reply(self.request({"op": "model", "model": model}), self)
 
 
+    def from_source_model(self, document):
+        """Validate an explicit Ruby typed-value document through the native core."""
+        reply = self.request({"op": "source_model", "model": document})
+        return SourceFormula._from_reply(reply, self)
+
+
 class Formula:
     """A native common-model value, with native writers and isolated snapshots."""
 
@@ -107,9 +117,21 @@ class Formula:
         """Return a fresh copy of the canonical {class, fields} model wire."""
         return json.loads(self._model_json)
 
-    def write(self, output_format, **options):
-        reply = self._kernel.request({"op": "write", "format": output_format,
-                                      "model": self.model, "options": options})
+    def _write_request(self, output_format, options):
+        return {"op": "write", "format": output_format,
+                "model": self.model, "options": options}
+
+    def write(self, output_format, *, formatter_options=_UNSET, **options):
+        """Write with request-local formatter settings; native option names also work.
+
+        formatter_options accepts the native formatterOptions object, including
+        its standard/base profile. None or False disables formatting.
+        """
+        if formatter_options is not _UNSET:
+            if "formatterOptions" in options:
+                raise TypeError("Use either formatter_options or formatterOptions")
+            options["formatterOptions"] = formatter_options
+        reply = self._kernel.request(self._write_request(output_format, options))
         if not isinstance(reply.get("output"), str):
             raise FacadeProtocolError("Native facade returned a non-string writer result")
         return reply["output"]
@@ -131,6 +153,46 @@ class Formula:
 
     def to_html(self, **options):
         return self.write("html", **options)
+
+
+class SourceFormula(Formula):
+    """Owned snapshot of an explicitly typed Ruby value-tree document.
+
+    This profile preserves value kinds, not Ruby object identity. Rendering
+    support is qualified separately from document transport support.
+    """
+
+    @classmethod
+    def _from_reply(cls, reply, kernel):
+        document = reply.get("model")
+        if (not isinstance(document, dict)
+                or document.get("schema") != RUBY_VALUES_PROFILE
+                or not isinstance(document.get("producer"), dict)
+                or not isinstance(document.get("root"), list)):
+            raise FacadeProtocolError("Native facade returned an invalid source document")
+        instance = cls.__new__(cls)
+        instance._model_json = _encode(document)
+        instance._kernel = kernel
+        return instance
+
+    @property
+    def model(self):
+        """Return a fresh typed source document rather than a canonical projection."""
+        return json.loads(self._model_json)
+
+    @property
+    def source_profile(self):
+        return RUBY_VALUES_PROFILE
+
+    @property
+    def source_model(self):
+        """Return a fresh typed document, including its producer assertions."""
+        return self.model
+
+    def _write_request(self, output_format, options):
+        request = super()._write_request(output_format, options)
+        request["source_profile"] = RUBY_VALUES_PROFILE
+        return request
 
 
 @lru_cache(maxsize=1)
@@ -157,3 +219,8 @@ def parse(text, input_format, **options):
 
 def from_model(model):
     return initialize_facade().from_model(model)
+
+
+def from_source_model(document):
+    """Validate and own a plurimath.ruby-values/1 source model document."""
+    return initialize_facade().from_source_model(document)

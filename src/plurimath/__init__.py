@@ -42,6 +42,8 @@ def evaluate(request):
 
 
 from .facade import (FacadeError, FacadeUnavailableError, FacadeProtocolError,
-                     FacadeKernel, Formula, initialize_facade, parse, from_model)
+                     FacadeKernel, Formula, SourceFormula, RUBY_VALUES_PROFILE,
+                     initialize_facade, parse, from_model, from_source_model)
 __all__ += ["FacadeError", "FacadeUnavailableError", "FacadeProtocolError",
-            "FacadeKernel", "Formula", "initialize_facade", "parse", "from_model"]
+            "FacadeKernel", "Formula", "SourceFormula", "RUBY_VALUES_PROFILE",
+            "initialize_facade", "parse", "from_model", "from_source_model"]

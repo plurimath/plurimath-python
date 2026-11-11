@@ -56,3 +56,24 @@ input formats, nodes and options. An `unported_capability` refusal is an incompl
 implementation, not accepted format compatibility. Numeric evaluation retains its
 existing native component and wire behavior. The common wire container does not
 claim generated Python classes or complete class-semantic validation.
+
+
+Request-local formatting is explicit: `formula.to_latex(formatter_options={"options": {"base": 2}})`.
+The same object accepts `profile: "base"` for the distinct Ruby NumberFormatter defaults;
+the default profile is `standard`. Existing `formatterOptions=` calls still work. Passing
+both spellings raises `TypeError`. Settings never change process configuration.
+
+`plurimath.from_source_model(document)` validates an explicit
+`plurimath.ruby-values/1` document and returns a `SourceFormula`. Its `source_model`
+is a fresh typed snapshot; `source_profile` identifies the wire contract. Its writers
+preserve the explicit source profile. The original `from_model` and canonical
+`Formula.model` contract are unchanged. Producer metadata is an assertion, not an
+authenticated signature. This typed value-tree profile preserves String/Symbol,
+Hash key kinds and numeric types; it does not preserve Ruby object identity or cycles.
+Document transport does not imply support for every typed writer or formatter value.
+Unported behavior, Float display and native resource limits remain explicit refusals.
+
+The reusable `native-wheel.yml` CI workflow consumes checksum-sealed native artifacts
+from the canonical producer and checks fresh installed wheels on Linux and Windows.
+Its caller must supply the exact facade source and both platform input artifacts;
+this repository does not invent a public native source location or publish releases.
