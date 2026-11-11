@@ -14,6 +14,7 @@ class InstalledProfiles(unittest.TestCase):
         directory = Path(__file__).parent
         cls.formatters = json.loads((directory / "formatter-reference.json").read_bytes())
         cls.typed = json.loads((directory / "source-values-reference.json").read_bytes())
+        cls.contexts = json.loads((directory / "formatter-context-reference.json").read_bytes())
 
     def test_source_formatter_six_format_bytes(self):
         for row in self.formatters["cases"]:
@@ -21,6 +22,34 @@ class InstalledProfiles(unittest.TestCase):
             for fmt, expected in row["expected"].items():
                 with self.subTest(id=row["id"], format=fmt):
                     self.assertEqual(formula.write(fmt, formatter_options=row["formatterOptions"]), expected)
+
+    def test_formatter_profiles_composites_and_source_error_envelopes(self):
+        for row in self.contexts["cases"]:
+            formula = self.kernel.from_model(row["model"])
+            for fmt, expected in row["writers"].items():
+                with self.subTest(id=row["id"], format=fmt):
+                    if "output" in expected:
+                        self.assertEqual(formula.write(fmt, formatter_options=row["formatterOptions"]), expected["output"])
+                    else:
+                        with self.assertRaises(plurimath.FacadeError) as caught:
+                            formula.write(fmt, formatter_options=row["formatterOptions"])
+                        details = caught.exception.details
+                        error = expected["error"]
+                        self.assertEqual(details.get("source_class"), error["class"])
+                        self.assertEqual(details.get("message"), error["message"])
+                        self.assertEqual(details.get("cause", {}).get("source_class"), error["cause_class"])
+
+    def test_native_formatter_refusals_resource_limit_and_reuse(self):
+        formula = self.kernel.from_model({"class": "Math::Number", "fields": {"value": "1234"}})
+        for settings, code in (({"precision": 1.5}, "unported_capability"),
+                               ({"options": {"groupDigits": []}}, "unported_capability"),
+                               ({"profile": "imagined"}, "invalid_request"),
+                               ({"options": {"groupDigits": 9223372036854775808}}, "resource_limit")):
+            with self.subTest(settings=settings):
+                with self.assertRaises(plurimath.FacadeError) as caught:
+                    formula.to_asciimath(formatter_options=settings)
+                self.assertEqual(caught.exception.code, code)
+                self.assertEqual(formula.to_asciimath(), "1234")
 
     def test_typed_collision_writers_preserve_source_value_kinds(self):
         for row in self.typed["rows"]:
