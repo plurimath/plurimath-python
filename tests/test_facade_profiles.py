@@ -15,6 +15,7 @@ class InstalledProfiles(unittest.TestCase):
         cls.formatters = json.loads((directory / "formatter-reference.json").read_bytes())
         cls.typed = json.loads((directory / "source-values-reference.json").read_bytes())
         cls.contexts = json.loads((directory / "formatter-context-reference.json").read_bytes())
+        cls.typed_formatters = json.loads((directory / "typed-formatter-reference.json").read_bytes())
 
     def test_source_formatter_six_format_bytes(self):
         for row in self.formatters["cases"]:
@@ -38,6 +39,22 @@ class InstalledProfiles(unittest.TestCase):
                         self.assertEqual(details.get("source_class"), error["class"])
                         self.assertEqual(details.get("message"), error["message"])
                         self.assertEqual(details.get("cause", {}).get("source_class"), error["cause_class"])
+
+    def test_typed_number_formatter_preserves_scalar_kinds(self):
+        for row in self.typed_formatters["rows"]:
+            formula = self.kernel.from_source_model(row["document"])
+            for fmt, expected in row["writers"].items():
+                with self.subTest(id=row["id"], format=fmt):
+                    if "output" in expected:
+                        self.assertEqual(formula.write(fmt, formatter_options=row["formatter_options"]), expected["output"])
+                    else:
+                        with self.assertRaises(plurimath.FacadeError) as caught:
+                            formula.write(fmt, formatter_options=row["formatter_options"])
+                        error = expected["error"]
+                        self.assertEqual(caught.exception.details.get("source_class"), error["class"])
+                        self.assertEqual(caught.exception.details.get("message"), error["message"])
+                        if "cause_class" in error:
+                            self.assertEqual(caught.exception.details.get("cause", {}).get("source_class"), error["cause_class"])
 
     def test_native_formatter_refusals_resource_limit_and_reuse(self):
         formula = self.kernel.from_model({"class": "Math::Number", "fields": {"value": "1234"}})

@@ -1,4 +1,4 @@
-"""Evaluate serialized Plurimath AST requests with the bundled Rust kernel."""
+"""Native Plurimath format, common-model and serialized evaluation APIs."""
 
 from functools import lru_cache
 from hashlib import sha256

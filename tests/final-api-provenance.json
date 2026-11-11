@@ -20,6 +20,15 @@
       "sha256": "ffe7f950ef939dc5035aa5339a49f8c888bfaedabd3038b2ec1facdfcc66d0c7",
       "producer_commit": "60caa168253f78c3f83e4119d2cb2e233a064af6",
       "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4"
+    },
+    {
+      "source_path": "workspace/core-native/plurimath-rs-final-integrated/fixtures/formatter/ruby-typed11.json",
+      "destination": "tests/typed-formatter-reference.json",
+      "sha256": "c0f129d76786c8387cd699a9c4497fbb57f18c612b967b65ef5709f1737b834d",
+      "producer_commit": "08ef32d11f3ff834a14ad9e56732b138b4e67f3a",
+      "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4",
+      "generator": "tests/support/formatter/export-typed11.rb",
+      "generator_sha256": "c5d979444fc03bdb11ad15f614ac4176d4d74bd3c13d350f7bfb14b5d7ab963a"
     }
   ],
   "policy": "Exact source fixtures preserved; native capability gates remain separate from wire transport."

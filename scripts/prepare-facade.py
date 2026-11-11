@@ -93,12 +93,19 @@ def main():
                     if path.is_file() and path.name.upper().startswith(("LICENSE", "COPYING", "NOTICE")):
                         available.setdefault(path.name, path.read_bytes())
             if package.get("source") is None:
-                expected = source_closure.get(base.resolve())
+                repository = Path(subprocess.check_output(
+                    ["git", "rev-parse", "--show-toplevel"], cwd=base, text=True).strip()).resolve()
+                # One sealed Git root can contain several path crates, such as
+                # Parsanol and its derive crate. The exact root is authoritative.
+                expected = source_closure.get(base.resolve(), source_closure.get(repository))
                 if expected is None and package["name"] == "plurimath-amath":
                     expected = seal.get("stage_amath")
                 revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=base, text=True).strip()
-                if expected is None or revision != expected or subprocess.check_output(["git", "status", "--porcelain"], cwd=base):
-                    raise RuntimeError("Stage source differs from its sealed clean revision")
+                if expected is None or revision != expected or subprocess.check_output(["git", "status", "--porcelain"], cwd=repository):
+                    raise RuntimeError("Path dependency differs from its sealed clean revision")
+                for path in repository.iterdir():
+                    if path.is_file() and path.name.upper().startswith(("LICENSE", "COPYING", "NOTICE")):
+                        available.setdefault(path.name, path.read_bytes())
             manifest_bytes = (base / "Cargo.toml").read_bytes()
         spdx_only = not available
         if spdx_only:

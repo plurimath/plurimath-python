@@ -18,7 +18,12 @@ with tempfile.TemporaryDirectory(prefix="plurimath-installed-") as directory:
     environment = Path(directory) / "venv"
     venv.create(environment, with_pip=True)
     python = environment / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
-    clean = {k: v for k, v in os.environ.items() if not k.startswith("PLURIMATH_") and k != "PYTHONPATH"}
+    excluded = {"PYTHONPATH", "PYTHONHOME", "LD_LIBRARY_PATH", "DYLD_LIBRARY_PATH",
+                "DYLD_FALLBACK_LIBRARY_PATH", "PARSANOL_LIB"}
+    clean = {k: v for k, v in os.environ.items() if not k.startswith("PLURIMATH_") and k not in excluded}
+    if os.name == "nt":
+        system = clean.get("SystemRoot", r"C:\Windows")
+        clean["PATH"] = system + r"\System32;" + system
     subprocess.run([str(python), "-m", "pip", "install", "--no-index", "--no-deps", "--no-compile", str(wheels[0])], env=clean, check=True)
     subprocess.run([str(python), "-I", "-m", "unittest", "discover", "-s", str(root / "tests"), "-p", "test_*.py"],
                    cwd=directory, env=clean, check=True)
