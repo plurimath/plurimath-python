@@ -39,3 +39,9 @@ def evaluate_json(request):
 def evaluate(request):
     """Return the engine's response envelope for a JSON-compatible request."""
     return _kernel().evaluate(request)
+
+
+from .facade import (FacadeError, FacadeUnavailableError, FacadeProtocolError,
+                     FacadeKernel, Formula, initialize_facade, parse, from_model)
+__all__ += ["FacadeError", "FacadeUnavailableError", "FacadeProtocolError",
+            "FacadeKernel", "Formula", "initialize_facade", "parse", "from_model"]

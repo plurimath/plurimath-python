@@ -40,3 +40,19 @@ identities. Build the wheel on Windows with the prepared `build-info.json` as
 needed by the installed runtime.
 
 The `validate_coverage` GUM operation compares caller-supplied coverage metadata with the documented Ruby compatibility semantics. Its diagnostic result carries the source metadata trust boundary.
+
+The native format facade is being implemented separately from serialized numeric
+evaluation. `parse(text, input_format)` returns a `Formula` whose `model` is the
+canonical native `{class, fields}` common-model wire; the six `to_*` methods call
+the Rust writers. Python contains no parser, converter or writer implementation.
+`FacadeKernel(library_path)` provides an explicit native context. Packaged format
+calls use a separately pinned facade library and receipt, without environment
+overrides. Build with both `PLURIMATH_FACADE_NATIVE` and
+`PLURIMATH_FACADE_RECEIPT` to include that component.
+
+This candidate is incomplete: the first source-backed AsciiMath slice and its
+six writers are qualified, while the native core is expanding toward the promised
+input formats, nodes and options. An `unported_capability` refusal is an incomplete
+implementation, not accepted format compatibility. Numeric evaluation retains its
+existing native component and wire behavior. The common wire container does not
+claim generated Python classes or complete class-semantic validation.
