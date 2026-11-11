@@ -34,7 +34,16 @@ def main():
     bundle = sealed_file("source_bundle")
     metadata_path = sealed_file("cargo_metadata_linux")
     sealed_file("header")
-    sealed_file("proof")
+    validation_path = sealed_file("proof" if "proof" in seal else "validation")
+    source_closure = {}
+    for dependency in seal.get("source_closure", []):
+        path = workspace / dependency["bundle"]
+        if digest(path) != dependency["sha256"]:
+            raise RuntimeError("Sealed stage source bundle changed")
+        retained = subprocess.check_output(["git", "bundle", "list-heads", str(path)], text=True)
+        if dependency["head"] not in [line.split()[0] for line in retained.splitlines()]:
+            raise RuntimeError("Stage bundle does not retain its pinned revision")
+        source_closure[(workspace / dependency["path"]).resolve()] = dependency["head"]
     head = seal["head"]
     heads = subprocess.check_output(["git", "bundle", "list-heads", str(bundle)], text=True)
     if head not in [line.split()[0] for line in heads.splitlines()]:
@@ -83,9 +92,12 @@ def main():
                 for path in repository.iterdir():
                     if path.is_file() and path.name.upper().startswith(("LICENSE", "COPYING", "NOTICE")):
                         available.setdefault(path.name, path.read_bytes())
-            if package["name"] == "plurimath-amath":
+            if package.get("source") is None:
+                expected = source_closure.get(base.resolve())
+                if expected is None and package["name"] == "plurimath-amath":
+                    expected = seal.get("stage_amath")
                 revision = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=base, text=True).strip()
-                if revision != seal["stage_amath"] or subprocess.check_output(["git", "status", "--porcelain"], cwd=base):
+                if expected is None or revision != expected or subprocess.check_output(["git", "status", "--porcelain"], cwd=base):
                     raise RuntimeError("Stage source differs from its sealed clean revision")
             manifest_bytes = (base / "Cargo.toml").read_bytes()
         spdx_only = not available
@@ -111,7 +123,8 @@ def main():
                "cargo_lock_sha256": seal["cargo_lock"]["sha256"],
                "cargo_metadata_sha256": digest(metadata_path), "source_bundle_sha256": digest(bundle),
                "producer_receipt_sha256": digest(args.seal), "scope": seal["status"],
-               "qualification": seal["qualification"], "limits": seal["limits"], "full_facade_complete": False}
+               "qualification": seal.get("qualification", json.loads(validation_path.read_bytes())),
+                "source_closure": seal.get("source_closure", []), "limits": seal["limits"], "full_facade_complete": False}
     (args.out / "build-info.json").write_text(json.dumps(receipt, indent=2) + "\n")
     shutil.copyfile(binary, args.out / binary.name)
     print(json.dumps({"source": head, "sha256": receipt["sha256"], "notice_groups": len(inventory)}))
