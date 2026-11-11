@@ -9,11 +9,11 @@ import plurimath
 
 
 class InstalledGum(unittest.TestCase):
-    def test_sealed_gum_wires_without_per_request_io(self):
-        fixture = json.loads(Path(__file__).with_name("gum-wires.json").read_bytes())
+    def _assert_fixture(self, filename, count):
+        fixture = json.loads(Path(__file__).with_name(filename).read_bytes())
         kernel = plurimath.initialize()
         self.assertIs(plurimath.initialize(), kernel)
-        self.assertEqual(len(fixture["cases"]), 100)
+        self.assertEqual(len(fixture["cases"]), count)
         with ExitStack() as guard:
             for name in ("builtins.open", "io.open", "pathlib.Path.open",
                          "pathlib.Path.read_bytes", "pathlib.Path.read_text"):
@@ -27,6 +27,13 @@ class InstalledGum(unittest.TestCase):
                         plurimath.evaluate_json(row["request_json"]),
                         row["expected_wire"],
                     )
+
+
+    def test_sealed_gum_wires_without_per_request_io(self):
+        self._assert_fixture("gum-wires.json", 100)
+
+    def test_coverage_metadata_validation_wires_without_per_request_io(self):
+        self._assert_fixture("coverage-validation-wires.json", 49)
 
 
 if __name__ == "__main__":

@@ -38,3 +38,5 @@ the AMD64 PE image, clean source pins, both metadata seals and target dependency
 identities. Build the wheel on Windows with the prepared `build-info.json` as
 `PLURIMATH_NATIVE_RECEIPT` and the DLL as `PLURIMATH_NATIVE`; neither variable is
 needed by the installed runtime.
+
+The `validate_coverage` GUM operation compares caller-supplied coverage metadata with the documented Ruby compatibility semantics. Its diagnostic result carries the source metadata trust boundary.
