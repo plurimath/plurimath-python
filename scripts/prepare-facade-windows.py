@@ -50,6 +50,19 @@ for package in metadata["packages"]:
     if package.get("license_file"):
         f = base / package["license_file"]
         available[f.name] = f.read_bytes()
+    # Source archives contain multi-crate Git roots. Read their actual root
+    # notices only when the build proves that root belongs to the canonical seal.
+    provenance = built.get("path_sources", {}).get(package["name"] + "@" + package["version"])
+    if package.get("source") is None and provenance is not None:
+        roots = {dependency["head"] for dependency in info.get("source_closure", [])}
+        roots.add(info["native_source_commit"])
+        repository = Path(provenance["repository"]).resolve()
+        if (provenance["head"] not in roots or not base.resolve().is_relative_to(repository)
+                or sha256((base / "Cargo.toml").read_bytes()).hexdigest() != provenance["manifest_sha256"]):
+            raise RuntimeError("Path dependency notice source differs from the sealed build")
+        for path in repository.iterdir():
+            if path.is_file() and path.name.upper().startswith(("LICENSE", "COPYING", "NOTICE")):
+                available.setdefault(path.name, path.read_bytes())
     identity = (package["name"], package["version"])
     canonical = canonical_packages.get(identity, {})
     texts = canonical_notices.get(identity, {})

@@ -22,3 +22,5 @@ jobs:
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -p test_facade_api.py
+      - name: Verify immutable native source archive provenance
+        run: python -m unittest discover -s scripts/tests -p test_source_archives.py

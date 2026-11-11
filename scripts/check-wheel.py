@@ -19,7 +19,7 @@ with tempfile.TemporaryDirectory(prefix="plurimath-installed-") as directory:
     venv.create(environment, with_pip=True)
     python = environment / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
     excluded = {"PYTHONPATH", "PYTHONHOME", "LD_LIBRARY_PATH", "DYLD_LIBRARY_PATH",
-                "DYLD_FALLBACK_LIBRARY_PATH", "PARSANOL_LIB"}
+                "DYLD_FALLBACK_LIBRARY_PATH", "PARSANOL_LIB", "RUST_MIN_STACK"}
     clean = {k: v for k, v in os.environ.items() if not k.startswith("PLURIMATH_") and k not in excluded}
     if os.name == "nt":
         system = clean.get("SystemRoot", r"C:\Windows")

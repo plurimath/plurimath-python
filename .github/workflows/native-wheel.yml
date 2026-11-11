@@ -32,10 +32,11 @@ jobs:
         with:
           name: ${{ inputs.artifact-prefix }}-${{ matrix.platform }}
           path: native-inputs
-      - run: python -m pip install 'setuptools>=69' 'wheel>=0.43'
+      - run: python -m pip install --target .build-tools 'setuptools>=69' 'wheel>=0.43'
       - name: Validate source, platform and every input byte, then build wheel
         env:
           EXPECTED_FACADE_SOURCE: ${{ inputs.facade-source }}
+          PYTHONPATH: ${{ github.workspace }}/.build-tools
         run: python scripts/build-native-input-wheel.py --bundle native-inputs --wheel-dir dist
       - name: Fresh install and all installed API/fixture checks
         run: python scripts/check-wheel.py --wheel-dir dist

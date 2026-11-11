@@ -3,7 +3,7 @@ import argparse
 from hashlib import sha256
 import io
 import json
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import shutil
 import subprocess
 import sysconfig
@@ -12,6 +12,39 @@ import tarfile
 
 def digest(path):
     return sha256(path.read_bytes()).hexdigest()
+
+
+
+def archive_entries(data):
+    entries = {}
+    with tarfile.open(fileobj=io.BytesIO(data), mode="r:*") as archive:
+        for member in archive:
+            if member.isdir():
+                continue
+            name = PurePosixPath(member.name)
+            if name.is_absolute() or ".." in name.parts or member.name in entries:
+                raise RuntimeError("Unsafe or duplicate source archive entry")
+            if member.isfile():
+                payload = archive.extractfile(member).read()
+                identity = ("file", member.mode & 0o777, sha256(payload).hexdigest())
+            elif member.issym():
+                identity = ("symlink", member.mode & 0o777, member.linkname)
+            else:
+                raise RuntimeError("Unsupported source archive entry type")
+            entries[member.name] = identity
+    return entries
+
+
+def validate_dependency_archive(repository, head, tree, archive, expected_sha256):
+    if digest(archive) != expected_sha256:
+        raise RuntimeError("Dependency source archive checksum changed")
+    actual_tree = subprocess.check_output(
+        ["git", "rev-parse", head + "^{tree}"], cwd=repository, text=True).strip()
+    if actual_tree != tree:
+        raise RuntimeError("Dependency source tree differs from its sealed commit")
+    expected = subprocess.check_output(["git", "archive", "--format=tar", head], cwd=repository)
+    if archive_entries(archive.read_bytes()) != archive_entries(expected):
+        raise RuntimeError("Dependency source archive does not match its sealed Git tree")
 
 
 def main():
@@ -37,13 +70,18 @@ def main():
     validation_path = sealed_file("proof" if "proof" in seal else "validation")
     source_closure = {}
     for dependency in seal.get("source_closure", []):
-        path = workspace / dependency["bundle"]
-        if digest(path) != dependency["sha256"]:
-            raise RuntimeError("Sealed stage source bundle changed")
-        retained = subprocess.check_output(["git", "bundle", "list-heads", str(path)], text=True)
-        if dependency["head"] not in [line.split()[0] for line in retained.splitlines()]:
-            raise RuntimeError("Stage bundle does not retain its pinned revision")
-        source_closure[(workspace / dependency["path"]).resolve()] = dependency["head"]
+        repository = (workspace / dependency["path"]).resolve()
+        if "archive" in dependency:
+            validate_dependency_archive(repository, dependency["head"], dependency["tree"],
+                                        workspace / dependency["archive"], dependency["sha256"])
+        else:
+            path = workspace / dependency["bundle"]
+            if digest(path) != dependency["sha256"]:
+                raise RuntimeError("Sealed stage source bundle changed")
+            retained = subprocess.check_output(["git", "bundle", "list-heads", str(path)], text=True)
+            if dependency["head"] not in [line.split()[0] for line in retained.splitlines()]:
+                raise RuntimeError("Stage bundle does not retain its pinned revision")
+        source_closure[repository] = dependency["head"]
     head = seal["head"]
     heads = subprocess.check_output(["git", "bundle", "list-heads", str(bundle)], text=True)
     if head not in [line.split()[0] for line in heads.splitlines()]:
