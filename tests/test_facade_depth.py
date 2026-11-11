@@ -14,12 +14,13 @@ def probe(depth):
     try:
         if depth < 256:
             formula = kernel.parse("(" * depth + "x" + ")" * depth, "asciimath")
-            rendered = formula.to_latex()
-            if not rendered:
+            formats = ("asciimath", "latex", "unicodemath", "html", "mathml", "omml")
+            rendered = {fmt: formula.write(fmt) for fmt in formats}
+            if not all(rendered.values()):
                 raise AssertionError("Empty rendering of a nonempty formula")
             retained = kernel.from_model(formula.model)
-            if retained.model != formula.model or retained.to_latex() != rendered:
-                raise AssertionError("Native returned model does not roundtrip through its public writer")
+            if retained.model != formula.model or {fmt: retained.write(fmt) for fmt in formats} != rendered:
+                raise AssertionError("Native returned model does not roundtrip through its public writers")
             outcome["roundtrip"] = True
         else:
             try:

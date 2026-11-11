@@ -81,6 +81,7 @@ for package in metadata["packages"]:
         available["SOURCE-LICENSE.json"] = (json.dumps({
             "name": package["name"], "version": package["version"],
             "spdx": package["license"], "source": package.get("source"),
+            "source_revision": provenance["head"] if provenance else None,
             "notice": "Source supplies SPDX metadata but no standalone license text; no text was synthesized.",
         }, indent=2) + "\n").encode()
     recorded = {}
