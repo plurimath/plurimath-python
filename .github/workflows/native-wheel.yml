@@ -44,3 +44,5 @@ jobs:
         with:
           name: plurimath-wheel-${{ matrix.platform }}
           path: dist/*.whl
+          if-no-files-found: error
+          retention-days: 30
