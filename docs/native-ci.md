@@ -50,12 +50,13 @@ fallbacks. `scripts/tests/test_public_native.py` exercises accepted and rejected
 contracts without simulating native runtime success.
 
 Each build uses `--locked`, Rust 1.95, one job, release optimization level 1,
-64 codegen units and a task-local Cargo home/target per component. Sources and
+64 codegen units and a task-local Cargo home and one target per immutable source root. Sources and
 locks are checked again afterward. The facade's library tests run on ordinary
 Rust test threads with no stack environment override. Native ELF/PE architecture
 and exported ABI version are tested on the actual build OS. Resolved Cargo
 metadata and actual upstream license files are captured; SPDX-only upstream
-limitations stay explicit. The resulting library, receipt and every notice byte
+limitations stay explicit. Notice identities include the complete Cargo package ID,
+so equal name/version packages from different sources never overwrite one another. The resulting library, receipt and every notice byte
 are sealed before packaging. Compiler-dependent binary hashes are measured from
 this build rather than copied from another machine's artifact.
 

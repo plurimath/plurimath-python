@@ -40,6 +40,8 @@ def validate(recipe, package):
     paths = []
     by_id = {}
     for source in sources:
+        if not isinstance(source["id"], str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_-]*", source["id"]):
+            raise ValueError("Source IDs must be portable target-directory identifiers")
         if not GITHUB.fullmatch(source["repository"]):
             raise ValueError("Source must use a public GitHub HTTPS repository without credentials")
         if not HEX40.fullmatch(source["revision"]) or not HEX40.fullmatch(source["tree"]):
@@ -140,7 +142,10 @@ def notice_inventory(metadata, roots, allowed_git, destination):
             texts["SOURCE-LICENSE.json"] = (json.dumps({"spdx": package["license"],
                 "source": source, "source_revision": source_revision,
                 "notice": "Upstream supplies SPDX metadata but no standalone license text; none synthesized."}, indent=2) + "\n").encode()
-        folder = destination / (package["name"] + "-" + package["version"])
+        # Equal name/version packages from distinct Cargo sources remain distinct.
+        cargo_id = package["id"]
+        source_suffix = sha256(cargo_id.encode()).hexdigest()[:12]
+        folder = destination / (package["name"] + "-" + package["version"] + "-" + source_suffix)
         folder.mkdir(parents=True)
         hashes = {}
         for name, data in texts.items():
@@ -148,6 +153,7 @@ def notice_inventory(metadata, roots, allowed_git, destination):
             path.write_bytes(data)
             hashes[path.relative_to(destination).as_posix()] = sha256(data).hexdigest()
         inventory.append({"name": package["name"], "version": package["version"],
+                          "cargo_id": cargo_id, "source": source,
                           "license": package.get("license"), "notices": hashes,
                           "spdx_only": spdx_only, "source_revision": source_revision})
     (destination / "manifest.json").write_text(json.dumps(inventory, indent=2) + "\n")
@@ -191,7 +197,9 @@ def build(recipe_path, workspace, out, package):
         lock = source / relative(component["lock_path"])
         if digest(lock) != component["cargo_lock_sha256"]:
             raise RuntimeError("Source Cargo.lock differs from qualified input: " + name)
-        target = workspace / "targets" / name
+        # Components in one canonical workspace reuse its coherent dependency build.
+        target = workspace / "targets" / component["source"]
+        environment["CARGO_TARGET_DIR"] = str(target.resolve())
         cargo = ["cargo", "+" + recipe["rust_toolchain"]]
         flags = ["--locked", "--manifest-path", source / relative(component["manifest_path"]),
                  "--target-dir", target, "--target", targets[platform], "--release"]

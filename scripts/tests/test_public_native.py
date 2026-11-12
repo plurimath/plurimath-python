@@ -75,7 +75,7 @@ class PublicNativeInputTests(unittest.TestCase):
             crate = source / "crate"
             crate.mkdir()
             (crate / "Cargo.toml").write_text('[package]\nname="bare"\n')
-            metadata = {"packages": [{"name": "bare", "version": "1", "source": None,
+            metadata = {"packages": [{"id": "path+bare@1", "name": "bare", "version": "1", "source": None,
                          "manifest_path": str(crate / "Cargo.toml"), "license": "BSD-2-Clause"}]}
             destination = root / "notices"
             destination.mkdir()
@@ -83,7 +83,7 @@ class PublicNativeInputTests(unittest.TestCase):
             entry = json.loads((destination / "manifest.json").read_text())[0]
             self.assertTrue(entry["spdx_only"])
             self.assertEqual(entry["source_revision"], "a" * 40)
-            self.assertIn("bare-1/SOURCE-LICENSE.json", entry["notices"])
+            self.assertTrue(any(p.endswith("/SOURCE-LICENSE.json") for p in entry["notices"]))
             metadata["packages"][0]["manifest_path"] = str(root / "unadmitted/Cargo.toml")
             with self.assertRaisesRegex(RuntimeError, "Unadmitted path"):
                 notice_inventory(metadata, [(source, "a" * 40)], [], root / "unused")
@@ -106,3 +106,26 @@ class PublicNativeInputTests(unittest.TestCase):
             self.assertEqual(result.returncode, 0, result.stderr)
             self.assertEqual(json.loads(result.stdout)["status"], "valid_admission_inputs")
             self.assertFalse(json.loads(result.stdout)["native_executed"])
+
+    def test_equal_names_and_versions_keep_distinct_notice_sources(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            packages = []
+            for name in ("first", "second"):
+                crate = root / name
+                crate.mkdir()
+                (crate / "LICENSE").write_text(name + " actual source notice")
+                packages.append({"id": "path+" + name, "name": "same-name", "version": "1",
+                                 "source": None, "manifest_path": str(crate / "Cargo.toml"),
+                                 "license": "MIT"})
+            destination = root / "notices"
+            destination.mkdir()
+            notice_inventory({"packages": packages}, [(root, "a" * 40)], [], destination)
+            entries = json.loads((destination / "manifest.json").read_text())
+            self.assertEqual(len(entries), 2)
+            self.assertEqual(len({entry["cargo_id"] for entry in entries}), 2)
+            first, second = [set(entry["notices"]) for entry in entries]
+            self.assertFalse(first & second)
+            for entry in entries:
+                for path, expected in entry["notices"].items():
+                    self.assertEqual(sha256((destination / path).read_bytes()).hexdigest(), expected)
