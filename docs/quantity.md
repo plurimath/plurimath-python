@@ -56,3 +56,10 @@ records the older serialized Ruby entry point, which rejects these additive tags
 the expected typed values come from the Ruby library API. This document records
 the new native contract, not a claim that the preserved earlier milestone wheels
 already provide it. Final installed Linux and Windows qualification remains pending.
+
+The installed reference check also compares the four actual source-resolved unit
+maps (`m`, `m*s`, `m/s`, `km`), their ordered terms and dimensions, and exact
+canonical magnitudes using the captured source factors and offsets. Reference
+rational projection occurs only in tests. The binding contains no arithmetic.
+These maps provide no `dimension_id` oracle; existing UnitsDB/F40 qualification
+remains the separate reference for dimension identities.

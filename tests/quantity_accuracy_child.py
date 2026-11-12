@@ -1,7 +1,9 @@
 """Actual installed native quantity API proof; no simulated numeric implementation."""
+from fractions import Fraction
 import hashlib
 import json
 from pathlib import Path
+import struct
 import sys
 
 import plurimath
@@ -12,6 +14,11 @@ def main():
     provenance = json.loads((directory / "source.json").read_bytes())
     for filename, expected in provenance["files"].items():
         assert hashlib.sha256((directory / filename).read_bytes()).hexdigest() == expected
+    for filename, expected in provenance["supplements"].items():
+        assert hashlib.sha256((directory / filename).read_bytes()).hexdigest() == expected
+    unit_rows = json.loads((directory / "unit-maps.json").read_bytes())["units"]
+    units = {row["unit"]: row for row in unit_rows}
+    assert len(units) == 4
     payload = (directory / "vectors.json").read_bytes()
     rows = json.loads(payload)["cases"]
     encoded = (directory / "numeric-values.json").read_bytes()
@@ -48,6 +55,22 @@ def main():
         assert response["engine"] == "plurimath.quantity/1", row["id"]
         assert response["result"]["accuracy"] == expected["accuracy"], row["id"]
         snapshot = response["result"]["value"]
+        source_unit = units[expected["unit"]]
+        assert snapshot["terms"] == source_unit["terms"], row["id"]
+        assert snapshot["dimensions"] == source_unit["dimensions"], row["id"]
+        source_value = expected["value"]
+        # Reference-only exact rational projection, using source factors/offsets.
+        # The production binding forwards native results without any arithmetic.
+        if "rational" in source_value:
+            magnitude = Fraction(*map(int, source_value["rational"]))
+        elif "decimal" in source_value:
+            magnitude = Fraction(source_value["decimal"])
+        else:
+            binary64 = struct.unpack(">d", bytes.fromhex(source_value["binary64"]))[0]
+            magnitude = Fraction.from_float(binary64)
+        canonical = magnitude * Fraction(source_unit["factor"]) + Fraction(source_unit["offset"])
+        canonical_text = str(canonical.numerator) if canonical.denominator == 1 else str(canonical)
+        assert snapshot["canonical_magnitude"] == canonical_text, (row["id"], snapshot)
         tagged = any(isinstance(binding["value"], dict)
                      for binding in request["bindings"].values())
         if tagged:
@@ -63,7 +86,8 @@ def main():
     print(json.dumps({"cases": len(rows), "native_calls": len(rows) * 2,
                       "tagged": tagged_count, "legacy_strings": legacy_count,
                       "initialized_forbidden_events": events, "package": package,
-                      "source_vector_sha256": hashlib.sha256(payload).hexdigest()}))
+                      "source_vector_sha256": hashlib.sha256(payload).hexdigest(),
+                      "source_unit_maps": len(units)}))
 
 
 if __name__ == "__main__":

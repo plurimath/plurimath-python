@@ -53,6 +53,7 @@
     "float-decimal-neighbor"
   ],
   "supplements": {
-    "numeric-values.json": "4bf0e3502a9397218f666e46fd9eae645cb8b5170b595a10317944fe5560641f"
+    "numeric-values.json": "4bf0e3502a9397218f666e46fd9eae645cb8b5170b595a10317944fe5560641f",
+    "unit-maps.json": "ef9a6e951f205fa54fa805c84a2784a0ea963f63dcfe9be75748bd3a79f63f78"
   }
 }

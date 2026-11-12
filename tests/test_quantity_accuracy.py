@@ -17,5 +17,6 @@ class InstalledTypedQuantityAccuracy(unittest.TestCase):
         report = json.loads(result.stdout)
         self.assertEqual(report["cases"], 36)
         self.assertEqual(report["native_calls"], 72)
+        self.assertEqual(report["source_unit_maps"], 4)
         self.assertEqual(report["tagged"] + report["legacy_strings"], 36)
         self.assertEqual(report["initialized_forbidden_events"], [])
