@@ -63,3 +63,8 @@ canonical magnitudes using the captured source factors and offsets. Reference
 rational projection occurs only in tests. The binding contains no arithmetic.
 These maps provide no `dimension_id` oracle; existing UnitsDB/F40 qualification
 remains the separate reference for dimension identities.
+
+Two additive source cases separately check Decimal `2.5 m` to `cm`, and Float
+negative zero to `cm`. They require the original binary64 sign bit to remain in
+`value.numeric_value` while the converted value is the source Rational zero.
+These cases do not alter the original 36 source vectors.

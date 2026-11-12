@@ -54,6 +54,8 @@
   ],
   "supplements": {
     "numeric-values.json": "4bf0e3502a9397218f666e46fd9eae645cb8b5170b595a10317944fe5560641f",
-    "unit-maps.json": "ef9a6e951f205fa54fa805c84a2784a0ea963f63dcfe9be75748bd3a79f63f78"
-  }
+    "unit-maps.json": "ef9a6e951f205fa54fa805c84a2784a0ea963f63dcfe9be75748bd3a79f63f78",
+    "converted-cases.json": "d2a9271a11bcc0ee63fd11564177aa574f9ec1e5df8446a936f9d8809c81557a"
+  },
+  "converted_extra_cases": 2
 }

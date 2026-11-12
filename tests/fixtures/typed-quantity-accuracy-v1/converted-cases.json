@@ -1,0 +1,79 @@
+{
+  "schema": "quantity-converted-tags-source/1",
+  "ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+  "cases": [
+    {
+      "id": "decimal-converted-cm",
+      "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"variable\",\"name\":\"x\"},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"}},\"convert_to\":\"cm\"}",
+      "expected": {
+        "value": {
+          "numeric_value": {
+            "kind": "decimal",
+            "value": "0.25e1",
+            "precision": 2
+          },
+          "terms": [
+            {
+              "unit": "NISTu1",
+              "prefix": null,
+              "power": "1"
+            }
+          ]
+        },
+        "converted": {
+          "numeric_value": {
+            "kind": "rational",
+            "numerator": "250",
+            "denominator": "1"
+          },
+          "terms": [
+            {
+              "unit": "NISTu1",
+              "prefix": "NISTp10_-2",
+              "power": "1"
+            }
+          ]
+        },
+        "accuracy": {
+          "symbol": "limited_2"
+        }
+      }
+    },
+    {
+      "id": "negative-zero-converted-cm",
+      "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"variable\",\"name\":\"x\"},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"8000000000000000\"},\"unit\":\"m\"}},\"convert_to\":\"cm\"}",
+      "expected": {
+        "value": {
+          "numeric_value": {
+            "kind": "float",
+            "bits": "8000000000000000"
+          },
+          "terms": [
+            {
+              "unit": "NISTu1",
+              "prefix": null,
+              "power": "1"
+            }
+          ]
+        },
+        "converted": {
+          "numeric_value": {
+            "kind": "rational",
+            "numerator": "0",
+            "denominator": "1"
+          },
+          "terms": [
+            {
+              "unit": "NISTu1",
+              "prefix": "NISTp10_-2",
+              "power": "1"
+            }
+          ]
+        },
+        "accuracy": {
+          "symbol": "limited_float"
+        }
+      }
+    }
+  ]
+}

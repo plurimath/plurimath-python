@@ -29,6 +29,9 @@ def main():
     assert len(rows) == len(numeric) == 36
     assert set(numeric) == set(provenance["expected_ids"])
     requests = [(row, json.loads(row["request_json"])) for row in rows]
+    converted_rows = json.loads((directory / "converted-cases.json").read_bytes())["cases"]
+    assert len(converted_rows) == 2
+    converted_requests = [(row, json.loads(row["request_json"])) for row in converted_rows]
     package = plurimath.__file__
     plurimath.initialize()
     forbidden = ("open", "os.putenv", "os.unsetenv", "os.system", "subprocess.Popen",
@@ -82,8 +85,21 @@ def main():
             assert snapshot["magnitude"] == (numerator if denominator == "1"
                                              else numerator + "/" + denominator), row["id"]
             legacy_count += 1
+    for row, request in converted_requests:
+        before = json.dumps(request, sort_keys=True)
+        response = plurimath.evaluate(request)
+        assert response == json.loads(plurimath.evaluate_json(row["request_json"])), row["id"]
+        assert json.dumps(request, sort_keys=True) == before, row["id"]
+        assert response["ok"] is True, (row["id"], response)
+        result = response["result"]
+        assert result["accuracy"] == row["expected"]["accuracy"], row["id"]
+        for name in ("value", "converted"):
+            expected = row["expected"][name]
+            assert result[name]["numeric_value"] == expected["numeric_value"], (row["id"], name)
+            assert result[name]["terms"] == expected["terms"], (row["id"], name)
     assert events == []
-    print(json.dumps({"cases": len(rows), "native_calls": len(rows) * 2,
+    print(json.dumps({"cases": len(rows), "converted_cases": len(converted_rows),
+                      "native_calls": (len(rows) + len(converted_rows)) * 2,
                       "tagged": tagged_count, "legacy_strings": legacy_count,
                       "initialized_forbidden_events": events, "package": package,
                       "source_vector_sha256": hashlib.sha256(payload).hexdigest(),
