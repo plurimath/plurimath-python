@@ -1,0 +1,39 @@
+{
+  "schema": "plurimath.python-facade-feature/1",
+  "feature": "pma-measured-quantity-input",
+  "input_format": "pma",
+  "python_binding": "FacadeKernel.parse / plurimath.parse",
+  "python_admission": "unrestricted format string forwarded; no production change needed",
+  "parse_options": {
+    "accepted_keys": [],
+    "native_rejection_code": "PARSE_OPTION_ERROR",
+    "locale_or_decimal_coercion": false
+  },
+  "model_wire": "existing canonical {class,fields}; no independent Python PMA model/parser",
+  "source_reference": {
+    "path": "tests/pma-core-reference.json",
+    "sha256": "5120d01940f8643e521a34f93d82213e5bf6161483cf229b659ab805166c1f54",
+    "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4",
+    "ruby_runtime": "4.0.1",
+    "observed_common_models": 34,
+    "observed_core_refusals": 64,
+    "writer_observations": 204,
+    "declared_stage_intent_labels": {
+      "accepted": 38,
+      "refused": 60
+    },
+    "classification": "Core outcomes use model/refusal fields; original expect labels retained unchanged."
+  },
+  "candidate_parser_commit": "40e5442e6584331f13d7309555c9869a230c2c82",
+  "native_source_commit": null,
+  "cargo_lock_sha256": null,
+  "typed_stage_profile": {
+    "accepted_cases": 38,
+    "status": "separate native producer contract; not equivalent to core34 acceptance"
+  },
+  "qualification": {
+    "protocol_tests": "forwarding only; never native parity",
+    "native_installed_wheels": "pending integrated immutable seal"
+  },
+  "data_review_gate": "No corrected CWT/kpdata pins advanced."
+}

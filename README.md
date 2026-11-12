@@ -79,3 +79,8 @@ The reusable `native-wheel.yml` CI workflow consumes checksum-sealed native arti
 from the canonical producer and checks fresh installed wheels on Linux and Windows.
 Its caller must supply the exact facade source and both platform input artifacts;
 this repository does not invent a public native source location or publish releases.
+
+
+PMA measured and quantity input preparation is documented in [docs/pma.md](docs/pma.md).
+The next integrated native seal and installed-wheel qualification are pending;
+the earlier milestone wheel retains its original capability profile.
