@@ -37,7 +37,11 @@ def evaluate_json(request):
 
 
 def evaluate(request):
-    """Return the engine's response envelope for a JSON-compatible request."""
+    """Return the native response unchanged for a JSON-compatible request.
+
+    Explicit quantity decimal/rational/binary64 tags and numeric_value results
+    remain JSON mappings; this layer performs no numeric or unit conversion.
+    """
     return _kernel().evaluate(request)
 
 

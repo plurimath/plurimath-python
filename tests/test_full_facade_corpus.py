@@ -1,3 +1,5 @@
+import json
+from pathlib import Path
 """Strict actual source outputs/classes, without accepted native-refusal baselines."""
 import unittest
 from corpus_assets import load
@@ -65,6 +67,10 @@ class FullInstalledFacadeCorpus(unittest.TestCase):
                     self.check_writer(lambda: self.kernel.from_model(model), output_format, {}, expected)
 
     def test_full_source_parser_models_and_refusals(self):
+        references = json.loads((Path(__file__).parent / "fixtures" /
+                                 "parser-negative23-public-ruby.json").read_bytes())["rows"]
+        source_errors = {row["id"]: row for row in references}
+        self.assertEqual(len(source_errors), 23)
         for job in load("parser-jobs.json.gz")["jobs"]:
             with self.subTest(id=job["id"], format=job["format"]):
                 if "model" in job:
@@ -74,3 +80,6 @@ class FullInstalledFacadeCorpus(unittest.TestCase):
                     with self.assertRaises(FacadeError) as refusal:
                         self.kernel.parse(job["input"], job["format"], **job.get("options", {}))
                     self.assertEqual(refusal.exception.code, "PARSE_ERROR")
+                    source = source_errors[job["id"]]
+                    self.assertEqual(source["input"], {"format": job["format"], "text": job["input"]})
+                    self.assertEqual(refusal.exception.details.get("source_class"), source["parse_error"]["class"])

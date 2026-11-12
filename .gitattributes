@@ -1,3 +1,5 @@
 * text=auto eol=lf
 tests/*.json -text
 tests/corpus/*.gz -text
+tests/fixtures/typed-quantity-accuracy-v1/** -text
+tests/fixtures/parser-negative23-*.json -text

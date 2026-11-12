@@ -1,0 +1,305 @@
+{
+  "ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+  "profile": "extra-source-input-models/1",
+  "rows": [
+    {
+      "id": "permissive-unclosed-paren",
+      "input": {
+        "format": "html",
+        "text": "<i>(</i>a"
+      },
+      "index": 0,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>(</i>a\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "permissive-unopened-paren",
+      "input": {
+        "format": "html",
+        "text": "a )"
+      },
+      "index": 1,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\na )\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "permissive-closing-run",
+      "input": {
+        "format": "html",
+        "text": ") ) ) )"
+      },
+      "index": 2,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n) ) ) )\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "latex-fence-curly-escaped",
+      "input": {
+        "format": "html",
+        "text": "<i>\\{</i>a<i>}</i>"
+      },
+      "index": 3,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>\\{</i>a<i>}</i>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "mathml-fences-002",
+      "input": {
+        "format": "html",
+        "text": "<i>[</i> 0  1 "
+      },
+      "index": 4,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>[</i> 0  1 \n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "mathml-over-under-019",
+      "input": {
+        "format": "html",
+        "text": "<i>T</i><sub>90</sub> / K = <i>A</i><sub>0</sub> &#x2b; <i>&sum;</i><sub>i = 1</sub><sup>9</sup> <i>A</i><sub>i</sub> <i><i>[</i><i>(</i><i>ln</i><i></i> <i>(</i>p / Pa<i>)</i> &#x2014; B<i>)</i> / C<i>]</i></i><sup>i</sup> &#x2e;"
+      },
+      "index": 5,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>T</i><sub>90</sub> / K = <i>A</i><sub>0</sub> &#x2b; <i>&sum;</i><sub>i = 1</sub><sup>9</sup> <i>A</i><sub>i</sub> <i><i>[</i><i>(</i><i>ln</i><i></i> <i>(</i>p / Pa<i>)</i> &#x2014; B<i>)</i> / C<i>]</i></i><sup>i</sup> &#x2e;\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "mathml-scripts-007",
+      "input": {
+        "format": "html",
+        "text": "<i></i><sup>12</sup>"
+      },
+      "index": 6,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i></i><sup>12</sup>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "mathml-tables-006",
+      "input": {
+        "format": "html",
+        "text": "{ <table><tr><td>&#x2212; x</td><td>&#xa0; if &#xa0;</td><td>x &#x3c; 0</td></tr><tr><td>0</td><td>&#xa0; if &#xa0;</td><td>x = 0</td></tr><tr><td>x</td><td>&#xa0; if &#xa0;</td><td>x &#x3e; 0</td></tr></table>"
+      },
+      "index": 7,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n{ <table><tr><td>&#x2212; x</td><td>&#xa0; if &#xa0;</td><td>x &#x3c; 0</td></tr><tr><td>0</td><td>&#xa0; if &#xa0;</td><td>x = 0</td></tr><tr><td>x</td><td>&#xa0; if &#xa0;</td><td>x &#x3e; 0</td></tr></table>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-delimiters-009",
+      "input": {
+        "format": "html",
+        "text": "<i>[</i>9<i>[</i>"
+      },
+      "index": 8,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>[</i>9<i>[</i>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-delimiters-010",
+      "input": {
+        "format": "html",
+        "text": "<i>]</i>0<i>]</i>"
+      },
+      "index": 9,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>]</i>0<i>]</i>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-delimiters-011",
+      "input": {
+        "format": "html",
+        "text": "<i>]</i>1<i>[</i>"
+      },
+      "index": 10,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>]</i>1<i>[</i>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-equation-arrays-001",
+      "input": {
+        "format": "html",
+        "text": "<i>&sum;</i><sub><table><tr><td>0≤ i ≤ m</td></tr><tr><td>0<j<n </td></tr></table></sub>"
+      },
+      "index": 11,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<i>&sum;</i><sub><table><tr><td>0≤ i ≤ m</td></tr><tr><td>0<j<n </td></tr></table></sub>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-equation-arrays-004",
+      "input": {
+        "format": "html",
+        "text": "f <i>(</i>x<i>)</i> = <table><tr><td>-x,  &x<0</td></tr><tr><td>x,  &x≥0</td></tr></table>"
+      },
+      "index": 12,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\nf <i>(</i>x<i>)</i> = <table><tr><td>-x,  &x<0</td></tr><tr><td>x,  &x≥0</td></tr></table>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-equation-arrays-007",
+      "input": {
+        "format": "html",
+        "text": "U= <table><tr><td><i>Q</i><sub>e</sub>*E,  &if<i>Q</i><sub>e</sub><1</td></tr><tr><td>E,  &if <i>Q</i><sub>e</sub><S</td></tr><tr><td><i>(</i><i>⌊</i><i><i>Q</i><sub>e</sub></i><i>S</i><i>⌋</i>&#x2b;<i>⌈</i><i><i>Q</i><sub>e</sub> mod S</i><i>S</i><i>⌉</i><i>)</i>E,  &otherwise</td></tr></table>"
+      },
+      "index": 13,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\nU= <table><tr><td><i>Q</i><sub>e</sub>*E,  &if<i>Q</i><sub>e</sub><1</td></tr><tr><td>E,  &if <i>Q</i><sub>e</sub><S</td></tr><tr><td><i>(</i><i>⌊</i><i><i>Q</i><sub>e</sub></i><i>S</i><i>⌋</i>&#x2b;<i>⌈</i><i><i>Q</i><sub>e</sub> mod S</i><i>S</i><i>⌉</i><i>)</i>E,  &otherwise</td></tr></table>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-matrices-008",
+      "input": {
+        "format": "html",
+        "text": "<table><tr><td>1</td><td></td></tr><tr><td></td><td>1</td></tr></table>"
+      },
+      "index": 14,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<table><tr><td>1</td><td></td></tr><tr><td></td><td>1</td></tr></table>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-matrices-010",
+      "input": {
+        "format": "html",
+        "text": "<table><tr><td>1</td><td></td><td></td></tr><tr><td></td><td>1</td><td></td></tr><tr><td></td><td></td><td>1</td></tr></table>"
+      },
+      "index": 15,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<table><tr><td>1</td><td></td><td></td></tr><tr><td></td><td>1</td><td></td></tr><tr><td></td><td></td><td>1</td></tr></table>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "omml-matrices-017",
+      "input": {
+        "format": "html",
+        "text": "- <i>ln</i> R = <table><tr><td>2<i>N</i><sub>tot</sub>&#x3c4;</td><td>for &#x3c4;<<i>&#x3c4;</i><sub>o</sub></td></tr><tr><td>2<i>N</i><sub>tot</sub>&#x3c4;-4<i>N</i><sub>pair</sub><i>(</i>&#x3c4;-<i>&#x3c4;</i><sub>o</sub><i>)</i></td><td>'' &#x3c4;><i>&#x3c4;</i><sub>o</sub></td></tr></table>"
+      },
+      "index": 16,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n- <i>ln</i> R = <table><tr><td>2<i>N</i><sub>tot</sub>&#x3c4;</td><td>for &#x3c4;<<i>&#x3c4;</i><sub>o</sub></td></tr><tr><td>2<i>N</i><sub>tot</sub>&#x3c4;-4<i>N</i><sub>pair</sub><i>(</i>&#x3c4;-<i>&#x3c4;</i><sub>o</sub><i>)</i></td><td>'' &#x3c4;><i>&#x3c4;</i><sub>o</sub></td></tr></table>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "scope-8",
+      "input": {
+        "format": "html",
+        "text": "<b>x</bb>"
+      },
+      "index": 17,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<b>x</bb>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "scope-9",
+      "input": {
+        "format": "html",
+        "text": "<b><i>x</b></i>"
+      },
+      "index": 18,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<b><i>x</b></i>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "scope-10",
+      "input": {
+        "format": "html",
+        "text": "<B>x</b >"
+      },
+      "index": 19,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<B>x</b >\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "scope-12",
+      "input": {
+        "format": "html",
+        "text": "<B/>"
+      },
+      "index": 20,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<B/>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "scope-14",
+      "input": {
+        "format": "html",
+        "text": "<a><b>x</b>y</b>"
+      },
+      "index": 21,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<a><b>x</b>y</b>\n---- FORMULA END ----\n"
+      }
+    },
+    {
+      "id": "scope-16",
+      "input": {
+        "format": "html",
+        "text": "<ab><a>x</Ab></aB>"
+      },
+      "index": 22,
+      "canonical_format": "html",
+      "parse_error": {
+        "class": "Plurimath::Math::ParseError",
+        "message": "[plurimath] Error: Failed to parse the following formula with type `html`.\n[plurimath] Please first manually validate the formula.\n[plurimath] If this is a bug, please report the formula at our issue tracker at:\n[plurimath] https://github.com/plurimath/plurimath/issues\n---- FORMULA BEGIN ----\n<ab><a>x</Ab></aB>\n---- FORMULA END ----\n"
+      }
+    }
+  ]
+}

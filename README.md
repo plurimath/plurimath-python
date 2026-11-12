@@ -84,3 +84,7 @@ this repository does not invent a public native source location or publish relea
 PMA measured and quantity input preparation is documented in [docs/pma.md](docs/pma.md).
 The next integrated native seal and installed-wheel qualification are pending;
 the earlier milestone wheel retains its original capability profile.
+
+Typed quantity binding values and native result fields are documented in
+[docs/quantity.md](docs/quantity.md). The final native qualification is pending;
+the earlier milestone wheel retains its original response contract.
