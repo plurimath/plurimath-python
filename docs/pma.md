@@ -24,3 +24,7 @@ will be claimed only after the immutable integrated engine and installed wheels
 replay these source cases. Additional native refusal categories and caller UTF-8
 offsets are retained without inventing matching Ruby offsets where the source
 reference supplies none. See `features/pma-v1.json` for exact source fingerprints.
+
+`parse_options=` forwards an explicit JSON options value unchanged, including
+`None`, so native option-type errors remain native errors. Omit it to retain
+the usual keyword options. Combining both forms raises `TypeError`.

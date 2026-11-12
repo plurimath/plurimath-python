@@ -84,8 +84,11 @@ class FacadeKernel:
     def request(self, value):
         return self.request_json(_encode(value))
 
-    def parse(self, text, input_format, **options):
-        reply = self.request({"op": "parse", "format": input_format, "input": text, "options": options})
+    def parse(self, text, input_format, *, parse_options=_UNSET, **options):
+        if parse_options is not _UNSET and options:
+            raise TypeError("Use parse_options or keyword parse options, not both")
+        payload = options if parse_options is _UNSET else parse_options
+        reply = self.request({"op": "parse", "format": input_format, "input": text, "options": payload})
         return Formula._from_reply(reply, self)
 
     def from_model(self, model):
@@ -213,8 +216,8 @@ def initialize_facade():
     return FacadeKernel(library)
 
 
-def parse(text, input_format, **options):
-    return initialize_facade().parse(text, input_format, **options)
+def parse(text, input_format, *, parse_options=_UNSET, **options):
+    return initialize_facade().parse(text, input_format, parse_options=parse_options, **options)
 
 
 def from_model(model):

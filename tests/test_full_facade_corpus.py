@@ -48,6 +48,9 @@ class FullInstalledFacadeCorpus(unittest.TestCase):
                 def construct():
                     if "model" in source:
                         return self.kernel.from_model(source["model"])
+                    if "parseOptions" in case:
+                        return self.kernel.parse(source["text"], source["format"],
+                                                 parse_options=case["parseOptions"])
                     return self.kernel.parse(source["text"], source["format"])
                 expected = ({"output": case["expected"]} if "expected" in case
                             else {"error": {"class": case.get("raises")}})

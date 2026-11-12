@@ -36,5 +36,21 @@ class PMAForwarding(unittest.TestCase):
         self.assertEqual(request.call_args.args[0]["options"], {"locale": "fr", "decimal": ","})
 
 
+    def test_explicit_parse_option_values_preserve_presence_and_types(self):
+        kernel = FacadeKernel.__new__(FacadeKernel)
+        model = {"class": "Math::Formula", "fields": {"value": []}}
+        for value in (None, False, [], "raw", {"locale": "fr"}):
+            with self.subTest(value=value), patch.object(kernel, "request", return_value={"model": model}) as request:
+                kernel.parse("x", "asciimath", parse_options=value)
+                self.assertIs(request.call_args.args[0]["options"], value)
+
+    def test_explicit_and_keyword_parse_options_cannot_be_ambiguous(self):
+        kernel = FacadeKernel.__new__(FacadeKernel)
+        with patch.object(kernel, "request") as request:
+            with self.assertRaises(TypeError):
+                kernel.parse("x", "asciimath", parse_options=None, locale="fr")
+            request.assert_not_called()
+
+
 if __name__ == "__main__":
     unittest.main()
