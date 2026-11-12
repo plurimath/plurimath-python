@@ -23,8 +23,10 @@ jobs:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -p test_facade_api.py
       - name: Verify immutable native source archive provenance
-        run: python -m unittest discover -s scripts/tests -p test_source_archives.py
+        run: python -m unittest discover -s scripts/tests -p test_*.py
       - name: Check PMA forwarding without claiming native parity
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -p test_pma_forwarding.py
+      - name: Verify frozen full corpus bytes and source inventory
+        run: python -m unittest discover -s tests -p test_corpus_assets.py

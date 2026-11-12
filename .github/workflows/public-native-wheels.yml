@@ -1,0 +1,86 @@
+name: Public-source installed native wheels
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: native-wheels-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native:
+    name: Public native build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: '1.95.0'
+      - name: Validate admitted public source, lock and receipt identities
+        run: python scripts/build-public-native.py --manifest ci/native-build.json --validate-only
+      - name: Build both canonical libraries, prove default-thread Rust tests and seal exact inputs
+        run: python scripts/build-public-native.py --manifest ci/native-build.json --workspace .native-build --out native-inputs
+      - name: Install isolated wheel build tools
+        run: python -m pip install --target .build-tools 'setuptools>=69' 'wheel>=0.43'
+      - name: Set the admitted facade source identity
+        shell: python
+        run: |
+          import json, os
+          from pathlib import Path
+          recipe = json.loads(Path('ci/native-build.json').read_bytes())
+          source = next(s for s in recipe['sources'] if s['id'] == recipe['components']['facade']['source'])
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('EXPECTED_FACADE_SOURCE=' + source['revision'] + '\n')
+      - name: Verify sealed inputs and build one actual platform wheel
+        env:
+          PYTHONPATH: ${{ github.workspace }}/.build-tools
+        run: python scripts/build-native-input-wheel.py --bundle native-inputs --wheel-dir dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: native-wheel-${{ matrix.os }}
+          path: dist/*.whl
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: native-provenance-${{ matrix.os }}
+          include-hidden-files: true
+          path: |
+            .native-build/result.json
+            .native-build/build.log
+            .native-build/components/*/build-info.json
+            .native-build/components/*/cargo-metadata.json
+            .native-build/components/*/licenses/**
+            native-inputs/manifest.json
+          if-no-files-found: warn
+  installed:
+    name: Installed full API (${{ matrix.os }}, Python ${{ matrix.python }})
+    needs: native
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-latest]
+        python: ['3.9', '3.12', '3.14']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-wheel-${{ matrix.os }}
+          path: dist
+      - name: Fresh offline install; source corpora, PMA, profiles, options, lifecycle and depth/reuse
+        run: python scripts/check-wheel.py --wheel-dir dist
