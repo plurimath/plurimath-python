@@ -35,5 +35,30 @@
     "protocol_tests": "forwarding only; never native parity",
     "native_installed_wheels": "pending integrated immutable seal"
   },
-  "data_review_gate": "No corrected CWT/kpdata pins advanced."
+  "data_review_gate": "No corrected CWT/kpdata pins advanced.",
+  "public_build_dependencies": [
+    {
+      "package": "lutaml-rs",
+      "version": "0.1.0",
+      "public_url": "https://github.com/lutaml/lutaml-rs",
+      "query": "rev=945e6ada11f52f77b959a5df1f05fdbd23092939",
+      "commit": "945e6ada11f52f77b959a5df1f05fdbd23092939"
+    },
+    {
+      "package": "plurimath-amath",
+      "version": "0.1.0",
+      "public_url": "https://github.com/plurimath/amath-rs",
+      "query": "rev=16195ed52496d5ddca84552eb3f20ed69a87104a",
+      "commit": "16195ed52496d5ddca84552eb3f20ed69a87104a"
+    }
+  ],
+  "dependency_graph_candidate": {
+    "packages": 63,
+    "registry_packages": 53,
+    "serde": "1.0.219",
+    "serde_derive": "1.0.219",
+    "serde_json": "1.0.140",
+    "status": "preparation graph only; final Cargo.lock/source seal pending"
+  },
+  "public_dependency_refs_verified": true
 }
