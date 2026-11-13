@@ -1,0 +1,8 @@
+{
+  "schema": "plurimath-python-source-fixture/1",
+  "repository": "https://github.com/plurimath/plurimath-rs",
+  "commit": "6f68d21bbd175a798dba76029f2c056c968966fa",
+  "path": "plurimath-facade/fixtures/source-profile-ruby0a1-cases.json",
+  "sha256": "9e306817799f4aa335cbaf0739072dc74a30d0bef15da53f84bd5ccef2815c35",
+  "use": "Guarded one-case writer correction: the legacy 2928 row must match legacy_case and legacy_case_sha256 byte-for-byte before the measured Ruby 0a1df68 output replaces its expectation; every correction must apply"
+}

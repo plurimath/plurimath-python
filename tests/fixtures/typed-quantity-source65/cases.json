@@ -1,0 +1,2366 @@
+{
+ "schema": "plurimath-python.quantity-source65/1",
+ "cases": [
+  {
+   "id": "typed36:exact-rational",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"rational\":[\"5\",\"2\"]},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "rational",
+       "numerator": "15",
+       "denominator": "2"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:limited-float",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"4004000000000000\"},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "401e000000000000"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:limited-decimal",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.75e1",
+       "precision": 2
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:least-precise-wins-decimal",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"},\"y\":{\"value\":{\"decimal\":\"3.1\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "31/4",
+      "canonical_magnitude": "31/4",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.775e1",
+       "precision": 3
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:least-precise-wins-float",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"},\"y\":{\"value\":{\"binary64\":\"4008000000000000\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.75e1",
+       "precision": 2
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:limited-sum-same-unit",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"1.5\"},\"unit\":\"m\"},\"y\":{\"value\":\"2\",\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "7/2",
+      "canonical_magnitude": "7/2",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.35e1",
+       "precision": 2
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:string-exact-product",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"2.50\",\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:string-exact-least-precise",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"2.50\",\"unit\":\"m\"},\"y\":{\"value\":\"3.1\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "31/4",
+      "canonical_magnitude": "31/4",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:string-exact-sum-same-unit",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"1.5\",\"unit\":\"m\"},\"y\":{\"value\":\"2\",\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "7/2",
+      "canonical_magnitude": "7/2",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:string-exact-float-digits",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"2.5\",\"unit\":\"m\"},\"y\":{\"value\":\"3.0\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:string-exact-third",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"/\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"1\",\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1/3",
+      "canonical_magnitude": "1/3",
+      "dimension_id": "NISTd11",
+      "dimensions": {
+       "Length": "1",
+       "Time": "-1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "-1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:unused-decimal-binding",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"rational\":[\"5\",\"2\"]},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"},\"z\":{\"value\":{\"decimal\":\"1.5\"},\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "rational",
+       "numerator": "15",
+       "denominator": "2"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:unused-float-binding",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"rational\":[\"5\",\"2\"]},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"},\"z\":{\"value\":{\"binary64\":\"3ff8000000000000\"},\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "rational",
+       "numerator": "15",
+       "denominator": "2"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:unused-string-binding",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"},\"z\":{\"value\":\"1.5\",\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.75e1",
+       "precision": 2
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-trailing-zeros",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "15/2",
+      "canonical_magnitude": "15/2",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.75e1",
+       "precision": 2
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-six-digits",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.54321\"},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "762963/100000",
+      "canonical_magnitude": "762963/100000",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.762963e1",
+       "precision": 6
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_6"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-least-of-two",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"1.23456\"},\"unit\":\"m\"},\"y\":{\"value\":{\"decimal\":\"2.0\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "7716/3125",
+      "canonical_magnitude": "7716/3125",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.246912e1",
+       "precision": 6
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_1"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-integer-decimal",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"1200.0\"},\"unit\":\"m\"},\"y\":{\"value\":\"1\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1200",
+      "canonical_magnitude": "1200",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.12e4",
+       "precision": 4
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_4"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-small-magnitude",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"0.000125\"},\"unit\":\"m\"},\"y\":{\"value\":\"4\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1/2000",
+      "canonical_magnitude": "1/2000",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.5e-3",
+       "precision": 4
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_4"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-quotient",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"/\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"1.0\"},\"unit\":\"m\"},\"y\":{\"value\":{\"decimal\":\"3.0\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "33333333333333333333333333333333/100000000000000000000000000000000",
+      "canonical_magnitude": "33333333333333333333333333333333/100000000000000000000000000000000",
+      "dimension_id": "NISTd11",
+      "dimensions": {
+       "Length": "1",
+       "Time": "-1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "-1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.33333333333333333333333333333333e0",
+       "precision": 32
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_1"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-decimal-times-rational",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"},\"y\":{\"value\":{\"rational\":[\"1\",\"3\"]},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "33333333333333333333333333333333/40000000000000000000000000000000",
+      "canonical_magnitude": "33333333333333333333333333333333/40000000000000000000000000000000",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.833333333333333333333333333333325e0",
+       "precision": 33
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-sum-unit-conversion",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"1.5\"},\"unit\":\"km\"},\"y\":{\"value\":{\"decimal\":\"250.0\"},\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "7/4",
+      "canonical_magnitude": "1750",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": "NISTp10_3",
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.175e1",
+       "precision": 3
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:precision-difference",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"10.25\"},\"unit\":\"m\"},\"y\":{\"value\":{\"decimal\":\"0.5\"},\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "39/4",
+      "canonical_magnitude": "39/4",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.975e1",
+       "precision": 3
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_1"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-sum-tenths",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"3fb999999999999a\"},\"unit\":\"m\"},\"y\":{\"value\":{\"binary64\":\"3fc999999999999a\"},\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1351079888211149/4503599627370496",
+      "canonical_magnitude": "1351079888211149/4503599627370496",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "3fd3333333333334"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-product-tenth",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"3fb999999999999a\"},\"unit\":\"m\"},\"y\":{\"value\":\"3\",\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1351079888211149/4503599627370496",
+      "canonical_magnitude": "1351079888211149/4503599627370496",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "3fd3333333333334"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-quotient",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"/\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"3ff0000000000000\"},\"unit\":\"m\"},\"y\":{\"value\":{\"binary64\":\"4008000000000000\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "6004799503160661/18014398509481984",
+      "canonical_magnitude": "6004799503160661/18014398509481984",
+      "dimension_id": "NISTd11",
+      "dimensions": {
+       "Length": "1",
+       "Time": "-1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "-1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "3fd5555555555555"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-times-decimal",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"3fb999999999999a\"},\"unit\":\"m\"},\"y\":{\"value\":{\"decimal\":\"3.3\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "33/100",
+      "canonical_magnitude": "33/100",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.33e0",
+       "precision": 2
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-times-rational",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"3fb999999999999a\"},\"unit\":\"m\"},\"y\":{\"value\":{\"rational\":[\"1\",\"3\"]},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "4803839602528529/144115188075855872",
+      "canonical_magnitude": "4803839602528529/144115188075855872",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "3fa1111111111111"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-sum-unit-conversion",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"3fb999999999999a\"},\"unit\":\"km\"},\"y\":{\"value\":{\"binary64\":\"3ff0000000000000\"},\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "3638908498915361/36028797018963968",
+      "canonical_magnitude": "454863562364420125/4503599627370496",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": "NISTp10_3",
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "3fb9db22d0e56042"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:unused-decimal-binding-single-variable",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"variable\",\"name\":\"x\"},\"bindings\":{\"x\":{\"value\":\"2\",\"unit\":\"m\"},\"unused\":{\"value\":{\"decimal\":\"0.01\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "2",
+      "canonical_magnitude": "2",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "rational",
+       "numerator": "2",
+       "denominator": "1"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:unused-float-binding-single-variable",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"variable\",\"name\":\"x\"},\"bindings\":{\"x\":{\"value\":\"2\",\"unit\":\"m\"},\"unused\":{\"value\":{\"binary64\":\"3fb999999999999a\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "2",
+      "canonical_magnitude": "2",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "rational",
+       "numerator": "2",
+       "denominator": "1"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:decimal-zero-precision",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"variable\",\"name\":\"x\"},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"0.0\"},\"unit\":\"m\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "0",
+      "canonical_magnitude": "0",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.0",
+       "precision": 0
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_0"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:decimal-leading-zero-precision",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"0.01\"},\"unit\":\"m\"},\"y\":{\"value\":{\"decimal\":\"100.0\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1",
+      "canonical_magnitude": "1",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.1e1",
+       "precision": 1
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_1"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:decimal-conversion-neighbor",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"0.1\"},\"unit\":\"m\"},\"y\":{\"value\":{\"decimal\":\"0.2\"},\"unit\":\"cm\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "51/500",
+      "canonical_magnitude": "51/500",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.102e0",
+       "precision": 3
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_1"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-rounding-neighbor",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"3fb999999999999a\"},\"unit\":\"m\"},\"y\":{\"value\":{\"binary64\":\"3fc999999999999a\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1441151880758559/72057594037927936",
+      "canonical_magnitude": "1441151880758559/72057594037927936",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "3f947ae147ae147c"
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "typed36:float-decimal-neighbor",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"0.1\"},\"unit\":\"m\"},\"y\":{\"value\":{\"binary64\":\"3fc999999999999a\"},\"unit\":\"s\"}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "1/50",
+      "canonical_magnitude": "1/50",
+      "dimension_id": null,
+      "dimensions": {
+       "Length": "1",
+       "Time": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       },
+       {
+        "unit": "NISTu3",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.2e-1",
+       "precision": 2
+      }
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "converted2:decimal-converted-cm",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"variable\",\"name\":\"x\"},\"bindings\":{\"x\":{\"value\":{\"decimal\":\"2.5\"},\"unit\":\"m\"}},\"convert_to\":\"cm\"}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5/2",
+      "canonical_magnitude": "5/2",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "decimal",
+       "value": "0.25e1",
+       "precision": 2
+      }
+     },
+     "converted": {
+      "magnitude": "250",
+      "canonical_magnitude": "5/2",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": "NISTp10_-2",
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "rational",
+       "numerator": "250",
+       "denominator": "1"
+      }
+     },
+     "accuracy": {
+      "symbol": "limited_2"
+     }
+    }
+   }
+  },
+  {
+   "id": "converted2:negative-zero-converted-cm",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"variable\",\"name\":\"x\"},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"8000000000000000\"},\"unit\":\"m\"}},\"convert_to\":\"cm\"}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "0",
+      "canonical_magnitude": "0",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": null,
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "float",
+       "bits": "8000000000000000"
+      }
+     },
+     "converted": {
+      "magnitude": "0",
+      "canonical_magnitude": "0",
+      "dimension_id": "NISTd1",
+      "dimensions": {
+       "Length": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu1",
+        "prefix": "NISTp10_-2",
+        "power": "1"
+       }
+      ],
+      "numeric_value": {
+       "kind": "rational",
+       "numerator": "0",
+       "denominator": "1"
+      }
+     },
+     "accuracy": {
+      "symbol": "limited_float"
+     }
+    }
+   }
+  },
+  {
+   "id": "negative3:multiply-overflow",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"*\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"7fefffffffffffff\"},\"unit\":\"m\"},\"y\":{\"value\":\"2\",\"unit\":\"s\"}}}",
+   "source_error": {
+    "class": "Plurimath::Errors::Evaluation::InvalidBindingError",
+    "message": "wrong value for variable `quantity magnitude` (given Float, expected a real number)"
+   }
+  },
+  {
+   "id": "negative3:sum-overflow",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"7fefffffffffffff\"},\"unit\":\"m\"},\"y\":{\"value\":{\"binary64\":\"7fefffffffffffff\"},\"unit\":\"m\"}}}",
+   "source_error": {
+    "class": "Plurimath::Errors::Evaluation::InvalidBindingError",
+    "message": "wrong value for variable `quantity magnitude` (given Float, expected a real number)"
+   }
+  },
+  {
+   "id": "negative3:divide-overflow",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"/\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":{\"binary64\":\"7fefffffffffffff\"},\"unit\":\"m\"},\"y\":{\"value\":{\"binary64\":\"0010000000000000\"},\"unit\":\"s\"}}}",
+   "source_error": {
+    "class": "Plurimath::Errors::Evaluation::InvalidBindingError",
+    "message": "wrong value for variable `quantity magnitude` (given Float, expected a real number)"
+   }
+  },
+  {
+   "id": "scale24:0",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "35",
+      "canonical_magnitude": "6163/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:1",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5",
+      "canonical_magnitude": "5",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:2",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "35",
+      "canonical_magnitude": "6163/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:3",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5",
+      "canonical_magnitude": "5563/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:4",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "35",
+      "canonical_magnitude": "6163/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:5",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5",
+      "canonical_magnitude": "5",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:6",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "35",
+      "canonical_magnitude": "35",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:7",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"15\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5",
+      "canonical_magnitude": "5",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:8",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":false},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5963/20",
+      "canonical_magnitude": "5963/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:9",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":false},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "-5763/20",
+      "canonical_magnitude": "-5763/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:10",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":false},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "25",
+      "canonical_magnitude": "25",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:11",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":false},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "-15",
+      "canonical_magnitude": "-15",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:12",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":true},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5963/20",
+      "canonical_magnitude": "5963/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "ratio",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:13",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":true},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "-5763/20",
+      "canonical_magnitude": "-5763/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:14",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":true},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "25",
+      "canonical_magnitude": "25",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:15",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"5\",\"unit\":\"K\",\"difference\":true},\"y\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "-15",
+      "canonical_magnitude": "-15",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu5",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:16",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "35",
+      "canonical_magnitude": "6163/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:17",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5",
+      "canonical_magnitude": "5",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:18",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "6163/20",
+      "canonical_magnitude": "5813/10",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:19",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":false},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "-5363/20",
+      "canonical_magnitude": "5",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:20",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "35",
+      "canonical_magnitude": "6163/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "interval",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:21",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":false}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "5",
+      "canonical_magnitude": "5",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:22",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"+\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "6163/20",
+      "canonical_magnitude": "6163/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  },
+  {
+   "id": "scale24:23",
+   "request_json": "{\"schema\":\"plurimath.evaluate.quantity/1\",\"ast\":{\"type\":\"binary\",\"operator\":\"-\",\"left\":{\"type\":\"variable\",\"name\":\"x\"},\"right\":{\"type\":\"variable\",\"name\":\"y\"}},\"bindings\":{\"x\":{\"value\":\"20\",\"unit\":\"degC\",\"difference\":true},\"y\":{\"value\":\"288.15\",\"unit\":\"K\",\"difference\":true}}}",
+   "expected": {
+    "engine": "plurimath.quantity/1",
+    "grammar": "plurimath.numeric-ast/1",
+    "schema": "plurimath.evaluate.quantity/1",
+    "ok": true,
+    "result": {
+     "value": {
+      "magnitude": "-5363/20",
+      "canonical_magnitude": "-5363/20",
+      "dimension_id": "NISTd5",
+      "dimensions": {
+       "ThermodynamicTemperature": "1"
+      },
+      "scale": "difference",
+      "terms": [
+       {
+        "unit": "NISTu23",
+        "prefix": null,
+        "power": "1"
+       }
+      ]
+     },
+     "converted": null,
+     "accuracy": {
+      "symbol": "exact"
+     }
+    }
+   }
+  }
+ ]
+}

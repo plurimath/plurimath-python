@@ -1,6 +1,7 @@
+"""Strict actual source outputs/classes, without accepted native-refusal baselines."""
+from hashlib import sha256
 import json
 from pathlib import Path
-"""Strict actual source outputs/classes, without accepted native-refusal baselines."""
 import unittest
 from corpus_assets import load
 from plurimath import FacadeError, initialize_facade
@@ -42,8 +43,27 @@ class FullInstalledFacadeCorpus(unittest.TestCase):
                 construct().write(output_format, **options)
             self.assertEqual(refusal.exception.details.get("source_class"), source_class)
 
+    def source_corrections(self):
+        """Measured Ruby 0a1df68 corrections, applied only to byte-identical legacy rows."""
+        folder = Path(__file__).parent / "fixtures" / "source-profile-ruby0a1"
+        receipt = json.loads((folder / "source.json").read_bytes())
+        payload = (folder / "cases.json").read_bytes()
+        self.assertEqual(sha256(payload).hexdigest(), receipt["sha256"])
+        profile = json.loads(payload)
+        self.assertEqual(profile["schema"], "plurimath.facade-source-profile/1")
+        packed = (Path(__file__).parent / "corpus" / "writer-reference-2928.json.gz").read_bytes()
+        self.assertEqual(sha256(packed).hexdigest(), profile["legacy"]["writer_corpus_sha256"])
+        corrections = {(row["id"], row["format"]): row for row in profile["corrections"]}
+        self.assertEqual(len(corrections), len(profile["corrections"]))
+        self.assertEqual(len(corrections), 1)
+        return corrections
+
     def test_original_model_and_parse_writer_option_rows(self):
-        for row in load("writer-reference-2928.json.gz")["rows"]:
+        corrections = self.source_corrections()
+        applied = set()
+        rows = load("writer-reference-2928.json.gz")["rows"]
+        self.assertEqual(len(rows), 2928)
+        for row in rows:
             case = row["case"]
             with self.subTest(id=case["id"], format=row["output_format"]):
                 source = case["input"]
@@ -56,10 +76,24 @@ class FullInstalledFacadeCorpus(unittest.TestCase):
                     return self.kernel.parse(source["text"], source["format"])
                 expected = ({"output": case["expected"]} if "expected" in case
                             else {"error": {"class": case.get("raises")}})
+                correction = corrections.get((case["id"], row["output_format"]))
+                if correction is not None:
+                    encoded = json.dumps(case, sort_keys=True, separators=(",", ":"),
+                                         ensure_ascii=False).encode()
+                    self.assertEqual(sha256(encoded).hexdigest(), correction["legacy_case_sha256"])
+                    self.assertEqual(case, correction["legacy_case"])
+                    self.assertEqual(case["input"], correction["input"])
+                    self.assertEqual(case.get("options", {}), correction["options"])
+                    self.assertIsInstance(correction["expected_output"], str)
+                    expected = {"output": correction["expected_output"]}
+                    applied.add((case["id"], row["output_format"]))
                 self.check_writer(construct, row["output_format"], case.get("options", {}), expected)
+        self.assertEqual(applied, set(corrections), "every source correction must apply; no waiver")
 
     def test_current_source_text_models_through_all_writers(self):
-        for row in load("ruby-full-text-oracle.json.gz")["rows"]:
+        rows = load("ruby-full-text-oracle.json.gz")["rows"]
+        self.assertEqual(sum(len(row["writers"]) for row in rows), 3798 - 2928)
+        for row in rows:
             model = row.get("parsed_model", row.get("model"))
             for output_format, source in row["writers"].items():
                 with self.subTest(id=row["id"], format=output_format):
@@ -71,7 +105,9 @@ class FullInstalledFacadeCorpus(unittest.TestCase):
                                  "parser-negative23-public-ruby.json").read_bytes())["rows"]
         source_errors = {row["id"]: row for row in references}
         self.assertEqual(len(source_errors), 23)
-        for job in load("parser-jobs.json.gz")["jobs"]:
+        jobs = load("parser-jobs.json.gz")["jobs"]
+        self.assertEqual(len(jobs), 1349)
+        for job in jobs:
             with self.subTest(id=job["id"], format=job["format"]):
                 if "model" in job:
                     self.assertEqual(self.kernel.parse(job["input"], job["format"],

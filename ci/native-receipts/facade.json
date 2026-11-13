@@ -1,0 +1,13 @@
+{
+  "native_source_commit": "6f68d21bbd175a798dba76029f2c056c968966fa",
+  "native_source_tree": "93bcb1fd02f95b624dd23d9243937825c8a73fab",
+  "repository": "https://github.com/plurimath/plurimath-rs",
+  "cargo_lock_sha256": "65169a36e87a15e0a6a5bb2cdaba17fbf7e606621c25ce1d4df143dc3a0c00b4",
+  "source_status": "CANDIDATE: public plurimath-rs 6f68d21 (full Linux/Windows CI run 43428639813). Not the final integrated text-closure source; no final-package claim. One repin follows R's integrated public commit.",
+  "component": "facade",
+  "manifest": "plurimath-facade/Cargo.toml",
+  "features": [],
+  "source_provenance_sha256": "d17d6aca7517d6bc7ee2d8b446f13d492cdb3ca65facff98a237f89c11cfeab7",
+  "source_profile_sha256": "9e306817799f4aa335cbaf0739072dc74a30d0bef15da53f84bd5ccef2815c35",
+  "full_facade_complete": false
+}

@@ -68,3 +68,18 @@ free/reuse, initialized I/O guards, and isolated default-stack depths
 16/64/128 plus the typed 256 resource refusal/reuse. Source exceptions are checked
 by their recorded source class; an unported native refusal is a failure for a
 valid-source output. Forwarding tests alone never establish these properties.
+
+The installed matrix also covers the measured Ruby 0a1df68 writer correction for
+one legacy row. It is applied only when the legacy row matches its recorded bytes,
+and every correction must apply. It also covers the 65-case Ruby quantity packet
+(the strict 38-case subset, three Float refusals and 24 scale transitions), the
+87 residual LaTeX/UnicodeMath text shapes, and a warmed pass in which file,
+process, network and library-load events are refused.
+
+## Current pin
+
+`ci/native-build.json` currently pins public plurimath-rs 6f68d21 as a
+candidate. That commit does not yet contain the integrated text follow-up, so
+rows that depend on it are expected to fail there. The pin is replaced once by
+the integrated public commit. Readiness and merge need passing installed
+evidence on that final commit.
