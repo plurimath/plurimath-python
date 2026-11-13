@@ -1,0 +1,30 @@
+{
+  "schema": "plurimath.python-source-corpus/1",
+  "policy": "Original reference bytes preserved by lossless gzip; no consumer outputs or previous native-refusal baselines are expected values.",
+  "files": {
+    "writer-reference-2928.json.gz": {
+      "sha256": "03e18fd5ca1a91f83b78e861c6a0a01b8921c8ef611a324a4c57f957b3fd9bcb",
+      "uncompressed_sha256": "9cc87736b3dcb32c852717fc976edda1ae599c9370379fe87916604079a0a6f3",
+      "original_artifact": "handoffs/main-facade-python/final/corpus-references/writer-reference-2928.json",
+      "bytes": 126337
+    },
+    "ruby-full-text-oracle.json.gz": {
+      "sha256": "e11816f41ad8d9c1b213f8785a988e331505279ea9c1201a495087211af461ce",
+      "uncompressed_sha256": "db73f43617680640420bc515584a0b61422d7f1148fce895620be28b70ebf0a9",
+      "original_artifact": "handoffs/main-facade-python/final/corpus-references/ruby-full-text-oracle.json",
+      "bytes": 19881
+    },
+    "parser-jobs.json.gz": {
+      "sha256": "650beb9b2f60ec14155642dfbdcefbb082fdd5eb06e938a2c12e7cc9b5672989",
+      "uncompressed_sha256": "2cbeab3d731ccc4b4f5908b48698912424d825675b4d08993f2620f92827ff9e",
+      "original_artifact": "handoffs/main-facade-python/final/parser-jobs.json.gz",
+      "bytes": 65743
+    }
+  },
+  "writer_rows": 2928,
+  "model_writer_rows": 2070,
+  "parse_writer_rows": 858,
+  "text_model_writer_rows": 870,
+  "parser_rows": 1349,
+  "source_profiles": "Producer and source-file hashes remain inside each original document; original IDs and options retained."
+}

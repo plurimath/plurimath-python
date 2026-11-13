@@ -1,0 +1,14 @@
+{
+  "schema": "plurimath-python-source-fixture/1",
+  "repository": "https://github.com/plurimath/plurimath-rs",
+  "path": "plurimath-facade/fixtures/text-closure-followup/residual-shapes.json",
+  "sha256": "2b3605445e94025125f8155e7642dcd9919cb8f658baf54c8d6da5ad7ec238a0",
+  "status": "byte-identical to the integrated public plurimath-rs commit",
+  "source": "Ruby plurimath 0a1df68a5903d43da13b1e1ef85b6c0523feb1b4 Math.parse outcomes",
+  "rows": 87,
+  "commit": "7f1226364033e69075586d3f43a1a696dfa5f35b",
+  "text_followup_commits": [
+    "12982ed",
+    "d8acded9ab01d0a347ab302184061cf62ce1ca96"
+  ]
+}

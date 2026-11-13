@@ -1,0 +1,32 @@
+name: Python API
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  api:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-latest]
+        python: ['3.9', '3.12', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Exercise public API and allocation protocol without a native dependency
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -p test_facade_api.py
+      - name: Verify immutable native source archive provenance
+        run: python -m unittest discover -s scripts/tests -p test_*.py
+      - name: Check PMA forwarding without claiming native parity
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -p test_pma_forwarding.py
+      - name: Verify frozen full corpus bytes and source inventory
+        run: python -m unittest discover -s tests -p test_corpus_assets.py

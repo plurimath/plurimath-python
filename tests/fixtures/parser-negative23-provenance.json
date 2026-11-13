@@ -1,0 +1,11 @@
+{
+  "ruby": "ruby 4.0.1 (2026-01-13 revision e04267a14b) +PRISM [x86_64-linux]",
+  "parse_source_sha256": "7b0ec0d3906957b4c300030f0e24a7e89a034fca355c566540d252d4fdf94827",
+  "git_head": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4",
+  "parse_source_matches_ruby0a1df68": true,
+  "reference_sha256": "72db2b6308e375c73c116ce190ca4cf5441032f6b85365e6bf4766ab7c2a2855",
+  "source_repository": "plurimath/plurimath",
+  "source_method": "lib/plurimath/math.rb: Math.parse",
+  "source_receipt": "R source capture; raw full provenance retained in task handoff",
+  "comparison": "Additive exact source error class for23 unchanged parser jobs; no blanket message equality."
+}

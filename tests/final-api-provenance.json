@@ -1,0 +1,35 @@
+{
+  "fixtures": [
+    {
+      "source_path": "workspace/core-native/plurimath-rs-lossless-wire/fixtures/source-values/typed-collisions.json",
+      "sha256": "739025586d04c6d43ef3d2d1b6d9ae3c3411a906067eb1cfb683a2f27790ee78",
+      "destination": "tests/source-values-reference.json",
+      "producer_commit": "b2681543f2de85b56fd20d9bc9d0fac3110f286c",
+      "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4"
+    },
+    {
+      "source_path": "workspace/core-native/plurimath-rs-formatter-integrated/fixtures/formatter/ruby-standard66.json",
+      "sha256": "6d9b4222a337330264eab1ea62a8655714d99e72cd54c4f4816b3f85ae082ea6",
+      "destination": "tests/formatter-reference.json",
+      "producer_commit": "60caa168253f78c3f83e4119d2cb2e233a064af6",
+      "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4"
+    },
+    {
+      "source_path": "workspace/core-native/plurimath-rs-formatter-integrated/fixtures/formatter/ruby-contexts51.json",
+      "destination": "tests/formatter-context-reference.json",
+      "sha256": "ffe7f950ef939dc5035aa5339a49f8c888bfaedabd3038b2ec1facdfcc66d0c7",
+      "producer_commit": "60caa168253f78c3f83e4119d2cb2e233a064af6",
+      "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4"
+    },
+    {
+      "source_path": "workspace/core-native/plurimath-rs-final-integrated/fixtures/formatter/ruby-typed11.json",
+      "destination": "tests/typed-formatter-reference.json",
+      "sha256": "c0f129d76786c8387cd699a9c4497fbb57f18c612b967b65ef5709f1737b834d",
+      "producer_commit": "08ef32d11f3ff834a14ad9e56732b138b4e67f3a",
+      "ruby_source_commit": "0a1df68a5903d43da13b1e1ef85b6c0523feb1b4",
+      "generator": "tests/support/formatter/export-typed11.rb",
+      "generator_sha256": "c5d979444fc03bdb11ad15f614ac4176d4d74bd3c13d350f7bfb14b5d7ab963a"
+    }
+  ],
+  "policy": "Exact source fixtures preserved; native capability gates remain separate from wire transport."
+}

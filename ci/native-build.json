@@ -1,0 +1,47 @@
+{
+  "schema": "plurimath.python-public-native-build/1",
+  "rust_toolchain": "1.95.0",
+  "source_status": "Integrated public plurimath-rs 7f12263 (text follow-up 12982ed + d8acded, the sqrt nil operand and the Unicode lim^n Lim(nil, n) repair). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
+  "sources": [
+    {
+      "id": "plurimath_rs",
+      "repository": "https://github.com/plurimath/plurimath-rs",
+      "revision": "7f1226364033e69075586d3f43a1a696dfa5f35b",
+      "tree": "9daf6bc278a3a0bbd8dc868dd3d072ce58064969",
+      "path": "sources/plurimath-rs"
+    }
+  ],
+  "components": {
+    "numeric": {
+      "source": "plurimath_rs",
+      "manifest_path": "plurimath-numeric/Cargo.toml",
+      "lock_path": "Cargo.lock",
+      "cargo_lock_sha256": "65169a36e87a15e0a6a5bb2cdaba17fbf7e606621c25ce1d4df143dc3a0c00b4",
+      "features": [
+        "quantity"
+      ],
+      "receipt_template": "ci/native-receipts/numeric.json",
+      "receipt_template_sha256": "5eb54f0af8ab57d38c7263df112c07ba8cc0ec0e212344cfee7bc35373ba1027"
+    },
+    "facade": {
+      "source": "plurimath_rs",
+      "manifest_path": "plurimath-facade/Cargo.toml",
+      "lock_path": "Cargo.lock",
+      "cargo_lock_sha256": "65169a36e87a15e0a6a5bb2cdaba17fbf7e606621c25ce1d4df143dc3a0c00b4",
+      "features": [],
+      "receipt_template": "ci/native-receipts/facade.json",
+      "receipt_template_sha256": "523f923cd296186b3a0f67db018486266c82f9ecff11491b81ec91c741aeecda"
+    }
+  },
+  "allowed_git_sources": [
+    "git+https://github.com/lutaml/lutaml-rs?rev=945e6ada11f52f77b959a5df1f05fdbd23092939#945e6ada11f52f77b959a5df1f05fdbd23092939",
+    "git+https://github.com/lutaml/moxml-rs?rev=e49cdfc97df78bc681c804947e122399f09c50ae#e49cdfc97df78bc681c804947e122399f09c50ae",
+    "git+https://github.com/parsanol/parsanol-rs?rev=5206a33b5417b4ecd3a601930461ed2967c871e7#5206a33b5417b4ecd3a601930461ed2967c871e7",
+    "git+https://github.com/plurimath/amath-rs?rev=7a26965528cda91030d164ec27f10b6c89e14f6b#7a26965528cda91030d164ec27f10b6c89e14f6b",
+    "git+https://github.com/plurimath/latexmath-rs?rev=0f6ad8c243f3fc5a0ce1addf3116e6b8d544dd1e#0f6ad8c243f3fc5a0ce1addf3116e6b8d544dd1e",
+    "git+https://github.com/plurimath/umath-rs?rev=b071b67d8d2202909e97c1b860de5359dab0f09d#b071b67d8d2202909e97c1b860de5359dab0f09d",
+    "git+https://github.com/unitsml/asciiunits-rs?rev=1f771caef878b9d383a5f29b02f434b8b614b780#1f771caef878b9d383a5f29b02f434b8b614b780",
+    "git+https://github.com/unitsml/unitsdb-rs?rev=969a131b8992930a6ff6f869291f1f0d7cb68d33#969a131b8992930a6ff6f869291f1f0d7cb68d33",
+    "git+https://github.com/unitsml/unitsml-rs?rev=cdfbcc3087f271d8723b3c3d1e4764860601e570#cdfbcc3087f271d8723b3c3d1e4764860601e570"
+  ]
+}

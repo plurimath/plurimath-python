@@ -1,0 +1,50 @@
+{
+  "native_source_commit": "7f1226364033e69075586d3f43a1a696dfa5f35b",
+  "native_source_tree": "9daf6bc278a3a0bbd8dc868dd3d072ce58064969",
+  "repository": "https://github.com/plurimath/plurimath-rs",
+  "cargo_lock_sha256": "65169a36e87a15e0a6a5bb2cdaba17fbf7e606621c25ce1d4df143dc3a0c00b4",
+  "source_status": "Integrated public plurimath-rs 7f12263 (text follow-up 12982ed + d8acded, the sqrt nil operand and the Unicode lim^n Lim(nil, n) repair). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
+  "component": "numeric",
+  "manifest": "plurimath-numeric/Cargo.toml",
+  "features": [
+    "quantity"
+  ],
+  "profiles": [
+    "plurimath.evaluate.numeric/1",
+    "plurimath.evaluate.quantity/1",
+    "plurimath.evaluate.gum/1"
+  ],
+  "adapter_sha256": "b9b5ae3dd3d1a7e33466cc36675820ee219e63feb0c4c58802edb27f675db599",
+  "source_fixtures": {
+    "coverage-validation.json": "bc0d9c958d94a20c6055f4abd764d7401c6a8e3a489ca7185df5cee35c3fc8f2",
+    "f40-ruby-feature-additions-v1.json": "23b4c567839c1b7b77ea75ed3740807168f96a7a76638864e85c28781d802513",
+    "f40-ruby-unitsml-features-v1.json": "3aadf68a23261bf159a8344d1095201d38a11d854cb1d685929a536587ee2398",
+    "gum-annex-methods.json": "3a6f1ac371201190768d6975f9e91db8e697538c2b2db508edaadf8f96a3f151",
+    "gum-annex.json": "edc70064b806b3f8345802f1d77db0d93d5d5ba10b13b1ba22bea397fc7d10b9",
+    "gum-conformity.json": "fb1281768963085407d168015eb483178e777f186a950951bddf1c80dc3bd2f1",
+    "gum-f40.json": "e3c9d00c3dde90be87a317e53ff528b0bf61348ec982d87ef16d525777bd690e",
+    "gum-mcm-joint-rational.json": "67e6df174537df1949ffe89f6454da6b81e881f9b6b509235d11b347c20c54af",
+    "gum-mcm.json": "ec3586fb4ccd65cb132841353121a54474ced596acaaf27bfbd354371414f697",
+    "numeric-annex-h.json": "42e1b715dbcdb2c4c0f963fad5c92da69c649f8f4a8971babd409ac6693c15f9",
+    "numeric-bignum-v1.json": "d410af65f4f58d859c709754c09be51bef3d8aedf7e3404ac659bce22f24bd1f",
+    "numeric-nonfinite-v1.json": "fefb21a7c6803582593403573bfe7f886d5b5e9b6daa3ddd18e216b020ddbe1d",
+    "numeric-supplemental-v1.json": "f888c50611573e0992f37088126e8b89bfcd0688c109ff727fa34275bf19394d",
+    "numeric-v1.json": "0abf939a3c37fcf71e7a2c6a9e8b1ce554cf8378374fc18443355d4bf2352818",
+    "numeric-validation-v1.json": "c7be94172ac72328680e5dd96af957c0283ea6d1d04d49529dbc9b6bb580f5ed",
+    "quantity-accuracy-numeric-value-v1.json": "4bf0e3502a9397218f666e46fd9eae645cb8b5170b595a10317944fe5560641f",
+    "quantity-accuracy-typed-v1.json": "f578a7e9cfa7cb906643c76835ae2d79c2a089ff731005953fb5ea7c89e5bbe8",
+    "quantity-f40.json": "91822628fe1c7f10f7df94a18b9ff574608e85263c4c022be737e69a6c20dbe2",
+    "quantity-register.json": "37dad3976da015ec23b9838fd2b0b6d233eb1a20709baffa94662d84e62be059",
+    "quantity-source-accuracy-v1.json": "a73b38cfaaf273e75096d766a77ee589bc3c26e81daaa007f0876e5ca5ad86ca",
+    "quantity-source-float-refusals-v1.json": "9b653a63b0259bf86285f2d8120e5d6ad86e8e335e9338508d25298e52184b91",
+    "quantity-source-unit-maps-v1.json": "ef9a6e951f205fa54fa805c84a2784a0ea963f63dcfe9be75748bd3a79f63f78",
+    "source-profile-unitsdb-b210137-pre-register-scope.json": "6071652e3f150ce4745216badfb14f96640156dea0ed7c296ff17d41b71d53d9",
+    "source-profile-unitsdb-b210137.json": "a82918b9b32235f985bd69921642db812ee3b4681eb5691086b55635e17642cc",
+    "source-profile-unitsml-cdfbcc3.json": "1d86324f0807f17444e4adfbb7f1c53c983762435f467d2abbfcc79dd8301bd2"
+  },
+  "reference_component": {
+    "commit": "f6ba2bad60f20d82a6f763e1a7a4f82141426e51",
+    "linux_library_sha256": "f33e6741d798d854c13f6fea05ebf6914b43cd12bb751341787a075ee502c5f6",
+    "native725": "725/725 exact"
+  }
+}
