@@ -1,9 +1,9 @@
 {
-  "native_source_commit": "f9e6f9f6112a94d3a97f3b0a5032e58926c1d7de",
-  "native_source_tree": "ea194c1b722d12175000a6c42e845742a52fda9e",
+  "native_source_commit": "575388218eba5bb85aa133bcc6d20a9949bea625",
+  "native_source_tree": "e22655646199faa2884987be9b5ba8a9eeef0cb0",
   "repository": "https://github.com/plurimath/plurimath-rs",
   "cargo_lock_sha256": "65169a36e87a15e0a6a5bb2cdaba17fbf7e606621c25ce1d4df143dc3a0c00b4",
-  "source_status": "Integrated public plurimath-rs f9e6f9f (text follow-up 12982ed + d8acded). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
+  "source_status": "Integrated public plurimath-rs 5753882 (text follow-up 12982ed + d8acded, plus the sqrt nil operand and Unicode lim^n wrapper fixes). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
   "component": "facade",
   "manifest": "plurimath-facade/Cargo.toml",
   "features": [],

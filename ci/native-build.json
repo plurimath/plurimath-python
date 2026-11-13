@@ -1,13 +1,13 @@
 {
   "schema": "plurimath.python-public-native-build/1",
   "rust_toolchain": "1.95.0",
-  "source_status": "Integrated public plurimath-rs f9e6f9f (text follow-up 12982ed + d8acded). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
+  "source_status": "Integrated public plurimath-rs 5753882 (text follow-up 12982ed + d8acded, plus the sqrt nil operand and Unicode lim^n wrapper fixes). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
   "sources": [
     {
       "id": "plurimath_rs",
       "repository": "https://github.com/plurimath/plurimath-rs",
-      "revision": "f9e6f9f6112a94d3a97f3b0a5032e58926c1d7de",
-      "tree": "ea194c1b722d12175000a6c42e845742a52fda9e",
+      "revision": "575388218eba5bb85aa133bcc6d20a9949bea625",
+      "tree": "e22655646199faa2884987be9b5ba8a9eeef0cb0",
       "path": "sources/plurimath-rs"
     }
   ],
@@ -21,7 +21,7 @@
         "quantity"
       ],
       "receipt_template": "ci/native-receipts/numeric.json",
-      "receipt_template_sha256": "c85e188b533b5c496949812e6adeb602d1f6f101e3f4fcfd295a749e0ec2fcec"
+      "receipt_template_sha256": "ce3afbf52380e3f7f77a0459f128e58e06ffa69355f00d58510fff582d0bd439"
     },
     "facade": {
       "source": "plurimath_rs",
@@ -30,7 +30,7 @@
       "cargo_lock_sha256": "65169a36e87a15e0a6a5bb2cdaba17fbf7e606621c25ce1d4df143dc3a0c00b4",
       "features": [],
       "receipt_template": "ci/native-receipts/facade.json",
-      "receipt_template_sha256": "183af513cdc89fe290274d92ba60490eda33ce1fe72c2977ce34ae80580c5bd2"
+      "receipt_template_sha256": "747ffbb523165decc0364ed537846776da177faef044ea82969002e8c0c58edc"
     }
   },
   "allowed_git_sources": [
