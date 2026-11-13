@@ -104,6 +104,8 @@ def checkout(source, workspace, log):
 
 
 def notice_inventory(metadata, roots, allowed_git, destination):
+    # Compare canonical paths: Windows may spell one directory with short 8.3 names.
+    roots = [(Path(root).resolve(), revision) for root, revision in roots]
     inventory = []
     for package in metadata["packages"]:
         base = Path(package["manifest_path"]).resolve().parent
