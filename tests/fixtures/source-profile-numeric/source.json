@@ -1,0 +1,11 @@
+{
+  "schema": "plurimath-python-source-fixture/1",
+  "repository": "https://github.com/plurimath/plurimath-rs",
+  "commit": "575388218eba5bb85aa133bcc6d20a9949bea625",
+  "path": "plurimath-numeric/fixtures/",
+  "files": {
+    "source-profile-unitsdb-b210137.json": "a82918b9b32235f985bd69921642db812ee3b4681eb5691086b55635e17642cc",
+    "source-profile-unitsml-cdfbcc3.json": "1d86324f0807f17444e4adfbb7f1c53c983762435f467d2abbfcc79dd8301bd2"
+  },
+  "use": "Same guarded supersession as plurimath-numeric/tests/quantity.rs source_caller_register_wires: a superseded legacy row must match legacy_expected_wire and request_json byte for byte before the source expectation replaces it; exactly three rows are superseded"
+}

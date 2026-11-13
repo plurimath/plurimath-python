@@ -1,3 +1,4 @@
+from hashlib import sha256
 import json
 from pathlib import Path
 import unittest
@@ -28,9 +29,29 @@ class InstalledQuantity(unittest.TestCase):
     def test_serialized_caller_register_wires(self):
         fixture = json.loads(Path(__file__).with_name("quantity-register-v1.json").read_bytes())
         self.assertEqual(len(fixture["cases"]), 35)
+        # Source profiles record UnitsDB data and corrected scale semantics; each
+        # pins the superseded legacy expectation byte for byte.
+        folder = Path(__file__).parent / "fixtures" / "source-profile-numeric"
+        receipt = json.loads((folder / "source.json").read_bytes())
+        superseded = {}
+        for name, digest in receipt["files"].items():
+            payload = (folder / name).read_bytes()
+            self.assertEqual(sha256(payload).hexdigest(), digest)
+            for row in json.loads(payload)["superseded_legacy_rows"]:
+                superseded[row["id"]] = row
+        self.assertEqual(len(superseded), 3)
+        applied = set()
         for row in fixture["cases"]:
             with self.subTest(case=row["id"]):
-                self.assertEqual(plurimath.evaluate_json(row["request_json"]), row["expected_wire"])
+                expected = row["expected_wire"]
+                source = superseded.get(row["id"])
+                if source is not None:
+                    self.assertEqual(source["legacy_expected_wire"], row["expected_wire"])
+                    self.assertEqual(source["request_json"], row["request_json"])
+                    expected = source["expected_wire"]
+                    applied.add(row["id"])
+                self.assertEqual(plurimath.evaluate_json(row["request_json"]), expected)
+        self.assertEqual(applied, set(superseded))
 
     def test_frozen_f40_voltage_current_conversion(self):
         fixture = json.loads(Path(__file__).with_name("quantity-f40.json").read_bytes())
