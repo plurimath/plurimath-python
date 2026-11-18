@@ -3,6 +3,15 @@
 The Plurimath wheel exposes native formula parsing, common models and writers
 through `parse`, `from_model` and `Formula.write`. Format support is qualified
 and incomplete; native refusals identify capabilities that remain unported.
+
+CI replays the shared plurimath-testsuite corpus through the built wheel at the
+commit the Ruby gem uses, pinned in `tests/testsuite-pin.json`. Each target of
+each case must match the Ruby output byte for byte, and each rejection case
+must be refused. Rows that do not match yet are listed with a reason in
+`tests/testsuite-expected-fail.json`. The replay fails when an unlisted row
+differs and when a listed row starts to match, so the list only shrinks. To run
+it locally, install the wheel and PyYAML, check out the testsuite at the pinned
+commit and run `python scripts/replay-testsuite.py PATH`.
 The wheel also evaluates serialized AST requests using its bundled Rust kernel. Call `plurimath.evaluate(request)` for a Python response envelope
 or `plurimath.evaluate_json(request_text)` for the original JSON response.
 The engine owns exact numeric semantics and typed result, refusal, and
