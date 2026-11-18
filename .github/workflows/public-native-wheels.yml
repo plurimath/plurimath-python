@@ -84,3 +84,44 @@ jobs:
           path: dist
       - name: Fresh offline install; source corpora, PMA, profiles, options, lifecycle and depth/reuse
         run: python scripts/check-wheel.py --wheel-dir dist
+  testsuite:
+    name: Pinned plurimath-testsuite replay (${{ matrix.os }})
+    needs: native
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Read the testsuite pin
+        id: pin
+        shell: bash
+        run: echo "commit=$(python3 -c 'import json; print(json.load(open("tests/testsuite-pin.json"))["commit"])')" >> "$GITHUB_OUTPUT"
+      - uses: actions/checkout@v4
+        with:
+          repository: plurimath/plurimath-testsuite
+          ref: ${{ steps.pin.outputs.commit }}
+          path: .testsuite
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v4
+        with:
+          name: native-wheel-${{ matrix.os }}
+          path: dist
+      - name: Install the built wheel
+        shell: bash
+        run: python -m pip install dist/*.whl 'pyyaml==6.0.3'
+      - name: Replay the pinned corpus; listed rows only may differ
+        shell: bash
+        run: >
+          python scripts/replay-testsuite.py .testsuite
+          --report "$RUNNER_TEMP/testsuite-replay.json"
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: testsuite-replay-${{ matrix.os }}
+          path: ${{ runner.temp }}/testsuite-replay.json
+          if-no-files-found: warn
