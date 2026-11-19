@@ -48,6 +48,8 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/.build-tools
         run: python scripts/build-native-input-wheel.py --bundle native-inputs --wheel-dir dist
+      - name: Retag the Linux wheel manylinux, twine check, list wheel tags
+        run: python scripts/wheel_tags.py dist
       - uses: actions/upload-artifact@v4
         with:
           name: native-wheel-${{ matrix.os }}
