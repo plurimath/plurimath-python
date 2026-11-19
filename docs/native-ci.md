@@ -78,7 +78,7 @@ process, network and library-load events are refused.
 
 ## Current pin
 
-`ci/native-build.json` pins public plurimath-rs fc92390, which integrates the
+`ci/native-build.json` pins public plurimath-rs 1a22131, which integrates the
 text follow-up. Its final source seal is still pending on the Rust side, so the
 receipts keep `full_facade_complete` false. Readiness and merge need passing
 installed Linux and Windows evidence on this exact source and branch head.

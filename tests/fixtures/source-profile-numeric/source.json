@@ -1,7 +1,7 @@
 {
   "schema": "plurimath-python-source-fixture/1",
   "repository": "https://github.com/plurimath/plurimath-rs",
-  "commit": "fc923908e08b48d6b2f04225c91d9fcfbf385749",
+  "commit": "1a22131635d2480c5ef164b72b29d2be34f2d7da",
   "path": "plurimath-numeric/fixtures/",
   "files": {
     "source-profile-unitsdb-b210137.json": "a82918b9b32235f985bd69921642db812ee3b4681eb5691086b55635e17642cc",

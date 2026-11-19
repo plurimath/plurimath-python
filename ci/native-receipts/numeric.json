@@ -1,9 +1,9 @@
 {
-  "native_source_commit": "fc923908e08b48d6b2f04225c91d9fcfbf385749",
-  "native_source_tree": "b828955d67ffc8f816b2a89652905a100b8903da",
+  "native_source_commit": "1a22131635d2480c5ef164b72b29d2be34f2d7da",
+  "native_source_tree": "f9c51a84a7856bbcdfa502cc505c6d6b9bfa121c",
   "repository": "https://github.com/plurimath/plurimath-rs",
-  "cargo_lock_sha256": "0e6e1678dee85d1ddd0cd5c9b2d83356260424094bdc772f331d142ea162cadf",
-  "source_status": "Integrated public plurimath-rs fc92390 (7f12263 plus the UnicodeMath 675 facade, the UnitsML XML option and the menclose semantics wrap). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
+  "cargo_lock_sha256": "96ff1469147cca8ba47d374511ffec1f508ca4a109fd3c2be348cbc201c7948f",
+  "source_status": "Integrated public plurimath-rs 1a22131 (fc92390 plus the UnitsML sr/rad prefix, multi-unit and '/' XML fixes, on parsanol 1.5.9 from crates.io as the single SDK). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
   "component": "numeric",
   "manifest": "plurimath-numeric/Cargo.toml",
   "features": [
