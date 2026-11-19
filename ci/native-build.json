@@ -1,13 +1,13 @@
 {
   "schema": "plurimath.python-public-native-build/1",
   "rust_toolchain": "1.95.0",
-  "source_status": "Integrated public plurimath-rs fc92390 (7f12263 plus the UnicodeMath 675 facade, the UnitsML XML option and the menclose semantics wrap). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
+  "source_status": "Integrated public plurimath-rs 1a22131 (fc92390 plus the UnitsML sr/rad prefix, multi-unit and '/' XML fixes, on parsanol 1.5.9 from crates.io as the single SDK). R's final source seal for this commit is pending; full_facade_complete stays false until it is sealed.",
   "sources": [
     {
       "id": "plurimath_rs",
       "repository": "https://github.com/plurimath/plurimath-rs",
-      "revision": "fc923908e08b48d6b2f04225c91d9fcfbf385749",
-      "tree": "b828955d67ffc8f816b2a89652905a100b8903da",
+      "revision": "1a22131635d2480c5ef164b72b29d2be34f2d7da",
+      "tree": "f9c51a84a7856bbcdfa502cc505c6d6b9bfa121c",
       "path": "sources/plurimath-rs"
     }
   ],
@@ -16,31 +16,30 @@
       "source": "plurimath_rs",
       "manifest_path": "plurimath-numeric/Cargo.toml",
       "lock_path": "Cargo.lock",
-      "cargo_lock_sha256": "0e6e1678dee85d1ddd0cd5c9b2d83356260424094bdc772f331d142ea162cadf",
+      "cargo_lock_sha256": "96ff1469147cca8ba47d374511ffec1f508ca4a109fd3c2be348cbc201c7948f",
       "features": [
         "quantity"
       ],
       "receipt_template": "ci/native-receipts/numeric.json",
-      "receipt_template_sha256": "2841fbe473645a09f43e898e438a1dd17be05fbb85af7d2e79857c3784c3d84a"
+      "receipt_template_sha256": "20c71014c587aadf8eae9e1cd53d224959882df87b78f75a5e535f351f3780d2"
     },
     "facade": {
       "source": "plurimath_rs",
       "manifest_path": "plurimath-facade/Cargo.toml",
       "lock_path": "Cargo.lock",
-      "cargo_lock_sha256": "0e6e1678dee85d1ddd0cd5c9b2d83356260424094bdc772f331d142ea162cadf",
+      "cargo_lock_sha256": "96ff1469147cca8ba47d374511ffec1f508ca4a109fd3c2be348cbc201c7948f",
       "features": [],
       "receipt_template": "ci/native-receipts/facade.json",
-      "receipt_template_sha256": "dbe28d4cbe2544177eca90aff13faf8f1bd46f615b90767234403131bea46e27"
+      "receipt_template_sha256": "5027888a10b1d29f0b0272fa921e6c77342cfe588fa6ccf49f475900690296f8"
     }
   },
   "allowed_git_sources": [
     "git+https://github.com/lutaml/lutaml-rs?rev=945e6ada11f52f77b959a5df1f05fdbd23092939#945e6ada11f52f77b959a5df1f05fdbd23092939",
     "git+https://github.com/lutaml/moxml-rs?rev=e49cdfc97df78bc681c804947e122399f09c50ae#e49cdfc97df78bc681c804947e122399f09c50ae",
-    "git+https://github.com/parsanol/parsanol-rs?rev=8f8afd878a3e91b83e43c2005459bc9dc4927851#8f8afd878a3e91b83e43c2005459bc9dc4927851",
-    "git+https://github.com/plurimath/amath-rs?rev=65459926bfd1b9ec4521220235004866d1662d3e#65459926bfd1b9ec4521220235004866d1662d3e",
-    "git+https://github.com/plurimath/latexmath-rs?rev=d72024fa9f31cdbc4aad5dfdc2db07cbf892bf39#d72024fa9f31cdbc4aad5dfdc2db07cbf892bf39",
-    "git+https://github.com/plurimath/umath-rs?rev=df62d3d2ea0598d1f2431fc6048ad4cc829550ea#df62d3d2ea0598d1f2431fc6048ad4cc829550ea",
-    "git+https://github.com/unitsml/asciiunits-rs?rev=ffae242e27b34371fcbbe41a767cc6deda7cd0e9#ffae242e27b34371fcbbe41a767cc6deda7cd0e9",
+    "git+https://github.com/plurimath/amath-rs?rev=ae9de7e482f7db12efedec4d7ff107fefc88d987#ae9de7e482f7db12efedec4d7ff107fefc88d987",
+    "git+https://github.com/plurimath/latexmath-rs?rev=a02d96606dd215fed30762209bdae7d8bae4e2c4#a02d96606dd215fed30762209bdae7d8bae4e2c4",
+    "git+https://github.com/plurimath/umath-rs?rev=72969db0e4b056e6a35301bd0d11d728d683cb4c#72969db0e4b056e6a35301bd0d11d728d683cb4c",
+    "git+https://github.com/unitsml/asciiunits-rs?rev=5d917151d5ef6964015af696e3d69ca4ceea0f1a#5d917151d5ef6964015af696e3d69ca4ceea0f1a",
     "git+https://github.com/unitsml/unitsdb-rs?rev=969a131b8992930a6ff6f869291f1f0d7cb68d33#969a131b8992930a6ff6f869291f1f0d7cb68d33",
     "git+https://github.com/unitsml/unitsml-rs?rev=cdfbcc3087f271d8723b3c3d1e4764860601e570#cdfbcc3087f271d8723b3c3d1e4764860601e570"
   ]

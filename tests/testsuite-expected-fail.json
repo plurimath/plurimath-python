@@ -1,6 +1,6 @@
 {
  "testsuite_commit": "9767c37a8d7bb21a0694780ecfcbc4f1fbd9eb39",
- "native_source_commit": "fc923908e08b48d6b2f04225c91d9fcfbf385749",
+ "native_source_commit": "1a22131635d2480c5ef164b72b29d2be34f2d7da",
  "note": "Rows of the pinned testsuite the native core does not match yet. Remove a row when it passes; the replay fails on listed rows that pass.",
  "rows": {
   "mathml/partial-render.yaml#mathml-partial-011@html": "native writer refuses a Menclose with no notation (parameter_one null): unported_capability",
