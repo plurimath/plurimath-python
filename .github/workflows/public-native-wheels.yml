@@ -4,10 +4,13 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # publish.yml calls this workflow and uploads the wheels it builds.
+  workflow_call:
 permissions:
   contents: read
 concurrency:
-  group: native-wheels-${{ github.ref }}
+  # The workflow name keeps a publish.yml call apart from push and PR runs.
+  group: native-wheels-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   native:
@@ -95,14 +98,12 @@ jobs:
         os: [ubuntu-22.04]
     steps:
       - uses: actions/checkout@v4
-      - name: Read the testsuite pin
-        id: pin
-        shell: bash
-        run: echo "commit=$(python3 -c 'import json; print(json.load(open("tests/testsuite-pin.json"))["commit"])')" >> "$GITHUB_OUTPUT"
+      # A literal ref, not one computed at run time, so the checkout cannot be redirected.
+      # It must equal tests/testsuite-pin.json; replay-testsuite.py exits if the HEAD differs.
       - uses: actions/checkout@v4
         with:
           repository: plurimath/plurimath-testsuite
-          ref: ${{ steps.pin.outputs.commit }}
+          ref: 9767c37a8d7bb21a0694780ecfcbc4f1fbd9eb39
           path: .testsuite
       - uses: actions/setup-python@v5
         with:
