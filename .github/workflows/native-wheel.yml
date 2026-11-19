@@ -38,6 +38,8 @@ jobs:
           EXPECTED_FACADE_SOURCE: ${{ inputs.facade-source }}
           PYTHONPATH: ${{ github.workspace }}/.build-tools
         run: python scripts/build-native-input-wheel.py --bundle native-inputs --wheel-dir dist
+      - name: Retag the Linux wheel manylinux, twine check, list wheel tags
+        run: python scripts/wheel_tags.py dist
       - name: Fresh install and all installed API/fixture checks
         run: python scripts/check-wheel.py --wheel-dir dist
       - uses: actions/upload-artifact@v4
